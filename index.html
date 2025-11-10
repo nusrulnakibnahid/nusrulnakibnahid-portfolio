@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Nusrul Nakib Nahid | Full-Stack Developer</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>N</text></svg>" />
+
+    <!-- 1) Prevent theme flash + set initial theme BEFORE any CSS loads -->
+    <script>
+        (function () {
+            try {
+                const setting = localStorage.getItem('theme') || 'auto';
+                const prefersDark =
+                    window.matchMedia &&
+                    window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const dark = setting === 'dark' || (setting === 'auto' && prefersDark);
+                const r = document.documentElement;
+                r.classList.toggle('dark', dark);
+                r.setAttribute('data-theme', dark ? 'dark' : 'light');
+            } catch (e) { }
+        })();
+    </script>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 2) Configure Tailwind dark mode for CDN (must be AFTER the CDN script) -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        };
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="bg-white dark:bg-gray-900 transition-colors duration-500">
+    <!-- Header & Navigation -->
+    <header
+        class="fixed top-0 left-0 w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 lg:h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div
+                        class="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-lg lg:text-xl shadow-lg">
+                        N
+                    </div>
+                    <span class="text-xl lg:text-2xl font-bold text-gray-800 dark:text-white">Nusrul Nakib Nahid</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#home"
+                        class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-300">Home</a>
+                    <a href="#about"
+                        class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-300">About</a>
+                    <a href="#skills"
+                        class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-300">Skills</a>
+                    <a href="#experience"
+                        class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-300">Experience</a>
+                    <a href="#projects"
+                        class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-300">Projects</a>
+                    <a href="#certifications"
+                        class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-300">Certifications</a>
+                    <a href="#contact"
+                        class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-300">Contact</a>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Theme Toggle -->
+                    <button id="themeToggle"
+                        class="theme-toggle w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-blue-500 hover:text-white dark:hover:bg-blue-600 flex items-center justify-center text-gray-600 dark:text-gray-300 transition-all duration-300 transform hover:scale-110 hover:rotate-12"
+                        aria-label="Toggle theme" aria-pressed="false" title="Theme: auto / dark / light">
+                        <i class="fas fa-moon text-sm lg:text-base"></i>
+                    </button>
+
+                    <!-- Download CV Button -->
+                    <a href="assets/Nusrul Nakib Nahid's Resume.pdf" id="downloadCV" download
+                        class="download-btn bg-blue-500 hover:bg-blue-600 text-white px-4 lg:px-6 py-2 lg:py-3 rounded-lg flex items-center space-x-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-md">
+                        <i class="fas fa-download text-sm lg:text-base"></i>
+                        <span class="text-sm lg:text-base font-medium">Download CV</span>
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton"
+                        class="lg:hidden w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-300 transition-colors duration-300"
+                        aria-expanded="false" aria-controls="mobileMenu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu"
+            class="lg:hidden hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 transition-all duration-300 transform origin-top">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#home"
+                        class="mobile-nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium py-3 px-4 rounded-lg transition-colors duration-300">Home</a>
+                    <a href="#about"
+                        class="mobile-nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium py-3 px-4 rounded-lg transition-colors duration-300">About</a>
+                    <a href="#skills"
+                        class="mobile-nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium py-3 px-4 rounded-lg transition-colors duration-300">Skills</a>
+                    <a href="#experience"
+                        class="mobile-nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium py-3 px-4 rounded-lg transition-colors duration-300">Experience</a>
+                    <a href="#projects"
+                        class="mobile-nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium py-3 px-4 rounded-lg transition-colors duration-300">Projects</a>
+                    <a href="#certifications"
+                        class="mobile-nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium py-3 px-4 rounded-lg transition-colors duration-300">Certifications</a>
+                    <a href="#contact"
+                        class="mobile-nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium py-3 px-4 rounded-lg transition-colors duration-300">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home"
+        class="min-h-screen flex items-center pt-20 lg:pt-24 pb-16 lg:pb-20 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
+                <!-- Hero Content -->
+                <div class="lg:w-1/2 text-center lg:text-left animate-fade-in-up">
+                    <h1
+                        class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-800 dark:text-white mb-4 lg:mb-6 leading-tight">
+                        Nusrul Nakib <span class="text-blue-500">Nahid</span>
+                    </h1>
+                    <h2 class="text-xl sm:text-2xl lg:text-3xl text-blue-500 font-semibold mb-6 lg:mb-8">
+                        Full-Stack Developer
+                    </h2>
+                    <p
+                        class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-8 lg:mb-10 leading-relaxed max-w-2xl">
+                        Passionate about building clean, scalable, and efficient web
+                        applications. Skilled in Laravel, Vue.js, and modern web
+                        technologies with growing expertise in Python and Django.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#projects"
+                            class="btn-primary bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-md text-lg">View
+                            My Work</a>
+                        <a href="#contact"
+                            class="btn-secondary border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-lg">Contact
+                            Me</a>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="lg:w-1/2 flex justify-center animate-fade-in-up" style="animation-delay: 0.3s">
+                    <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+                        <div
+                            class="w-full h-full rounded-full bg-gradient-to-br from-blue-400 to-purple-600 p-1 shadow-2xl animate-float">
+                            <div
+                                class="w-full h-full rounded-full bg-white dark:bg-gray-800 overflow-hidden border-4 border-white dark:border-gray-800">
+                                <img src="assets/Nahid image.jpg" alt="Nusrul Nakib Nahid"
+                                    class="w-full h-full object-cover"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                                <div
+                                    class="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center hidden">
+                                    <i class="fas fa-user text-gray-400 text-6xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Elements -->
+                        <div
+                            class="absolute -top-4 -right-4 w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg animate-bounce-slow">
+                            <i class="fas fa-star text-white text-2xl"></i>
+                        </div>
+                        <div
+                            class="absolute -bottom-4 -left-4 w-16 h-16 bg-green-400 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                            <i class="fas fa-code text-white text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 lg:py-24 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+                class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-800 dark:text-white mb-12 lg:mb-16">
+                About Me
+            </h2>
+
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+                <!-- About Image -->
+                <div class="lg:w-2/5 flex justify-center">
+                    <div
+                        class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                        <img src="assets/Nahid image 2.jpg" alt="About Nusrul Nakib Nahid"
+                            class="w-full h-full object-cover"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div
+                            class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center hidden">
+                            <i class="fas fa-user-tie text-white text-6xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Content -->
+                <div class="lg:w-3/5">
+                    <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+                        I am a Software Engineering student from Daffodil International
+                        University with a strong passion for full-stack web development.
+                        Throughout my studies, I have completed several personal and
+                        academic projects that demonstrate my practical understanding of
+                        real-world software development.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                        <div
+                            class="flex items-center space-x-4 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <div
+                                class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                                <i class="fas fa-graduation-cap text-blue-500 text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 dark:text-white">
+                                    Education
+                                </h3>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    B.Sc in Software Engineering
+                                </p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex items-center space-x-4 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <div
+                                class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-blue-500 text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 dark:text-white">
+                                    Location
+                                </h3>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Uttara, Dhaka, Bangladesh
+                                </p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex items-center space-x-4 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <div
+                                class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                                <i class="fas fa-briefcase text-blue-500 text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 dark:text-white">
+                                    Experience
+                                </h3>
+                                <p class="text-gray-600 dark:text-gray-300">CTO at Gadgetaloy</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex items-center space-x-4 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <div
+                                class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                                <i class="fas fa-envelope text-blue-500 text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 dark:text-white">Email</h3>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    nusrulnakibnahid.mail@gmail.com
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                        I am eager to apply my technical knowledge and creativity in a
+                        professional environment to contribute to impactful projects and
+                        continue growing as a developer.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 lg:py-24 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+                class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-800 dark:text-white mb-12 lg:mb-16">
+                Skills & Expertise
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-16 lg:mb-20">
+                <!-- Technical Skills -->
+                <div class="animate-fade-in-left">
+                    <h3 class="text-2xl sm:text-3xl font-semibold text-gray-800 dark:text-white mb-8 flex items-center">
+                        <i class="fas fa-laptop-code text-blue-500 mr-4 text-3xl"></i>
+                        Technical Skills
+                    </h3>
+
+                    <div class="space-y-6">
+                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                                        <i class="fab fa-laravel text-red-500"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">Laravel</span>
+                                </div>
+                                <span class="text-blue-500 font-semibold">90%</span>
+                            </div>
+                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
+                                    data-width="90"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                                        <i class="fab fa-vuejs text-green-600"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">Vue.js</span>
+                                </div>
+                                <span class="text-blue-500 font-semibold">85%</span>
+                            </div>
+                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
+                                    data-width="85"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center">
+                                        <i class="fab fa-php text-indigo-600"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">PHP</span>
+                                </div>
+                                <span class="text-blue-500 font-semibold">88%</span>
+                            </div>
+                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
+                                    data-width="88"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center">
+                                        <i class="fab fa-js text-yellow-500"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">JavaScript</span>
+                                </div>
+                                <span class="text-blue-500 font-semibold">82%</span>
+                            </div>
+                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
+                                    data-width="82"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+                                        <i class="fab fa-python"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">Python &amp;
+                                        Django</span>
+                                </div>
+                                <span class="text-blue-500 font-semibold">75%</span>
+                            </div>
+                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
+                                    data-width="75"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills -->
+                <div class="animate-fade-in-right">
+                    <h3 class="text-2xl sm:text-3xl font-semibold text-gray-800 dark:text-white mb-8 flex items-center">
+                        <i class="fas fa-users text-blue-500 mr-4 text-3xl"></i>
+                        Soft Skills
+                    </h3>
+
+                    <div class="space-y-6">
+                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                                        <i class="fas fa-people-group text-blue-600"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">Teamwork &amp;
+                                        Collaboration</span>
+                                </div>
+                                <span class="text-blue-500 font-semibold">95%</span>
+                            </div>
+                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
+                                    data-width="95"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center">
+                                        <i class="fas fa-puzzle-piece text-emerald-600"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">Problem Solving</span>
+                                </div>
+                                <span class="text-blue-500 font-semibold">90%</span>
+                            </div>
+                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
+                                    data-width="90"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center">
+                                        <i class="fas fa-comments text-indigo-600"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">Communication</span>
+                                </div>
+                                <span class="text-blue-500 font-semibold">88%</span>
+                            </div>
+                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
+                                    data-width="88"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center">
+                                        <i class="fas fa-clock text-amber-500"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">Time Management</span>
+                                </div>
+                                <span class="text-blue-500 font-semibold">85%</span>
+                            </div>
+                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
+                                    data-width="85"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-fuchsia-100 dark:bg-fuchsia-900 flex items-center justify-center">
+                                        <i class="fas fa-arrows-rotate text-fuchsia-600"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">Adaptability</span>
+                                </div>
+                                <span class="text-blue-500 font-semibold">92%</span>
+                            </div>
+                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
+                                    data-width="92"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools & Technologies -->
+            <div class="animate-fade-in-up">
+                <h3 class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 dark:text-white mb-12">
+                    Tools & Technologies
+                </h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
+                    <div
+                        class="tool-item bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                        <i class="fab fa-git-alt text-orange-500 text-3xl sm:text-4xl mb-3"></i>
+                        <span class="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">Git</span>
+                    </div>
+                    <div
+                        class="tool-item bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                        <i class="fab fa-github text-gray-800 dark:text-white text-3xl sm:text-4xl mb-3"></i>
+                        <span class="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">GitHub</span>
+                    </div>
+                    <div
+                        class="tool-item bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                        <i class="fas fa-database text-blue-500 text-3xl sm:text-4xl mb-3"></i>
+                        <span class="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">MySQL</span>
+                    </div>
+                    <div
+                        class="tool-item bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                        <i class="fab fa-bootstrap text-purple-500 text-3xl sm:text-4xl mb-3"></i>
+                        <span class="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">Bootstrap</span>
+                    </div>
+                    <div
+                        class="tool-item bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                        <i class="fab fa-html5 text-orange-500 text-3xl sm:text-4xl mb-3"></i>
+                        <span class="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">HTML5</span>
+                    </div>
+                    <div
+                        class="tool-item bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                        <i class="fab fa-css3-alt text-blue-500 text-3xl sm:text-4xl mb-3"></i>
+                        <span class="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">CSS3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 lg:py-24 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+                class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-800 dark:text-white mb-12 lg:mb-16">
+                Work Experience
+            </h2>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="relative">
+                    <div
+                        class="timeline-line absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-500 to-purple-600 hidden lg:block">
+                    </div>
+
+                    <div class="space-y-12 lg:space-y-16">
+                        <!-- Experience Item 1 -->
+                        <div class="timeline-item flex flex-col lg:flex-row items-center">
+                            <div class="lg:w-1/2 lg:pr-12 mb-8 lg:mb-0 lg:text-right animate-fade-in-left">
+                                <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white">
+                                    Chief Technology Officer (CTO)
+                                </h3>
+                                <p class="text-blue-500 font-medium text-lg sm:text-xl">Gadgetaloy</p>
+                                <p class="text-gray-600 dark:text-gray-400">April 2025 - Present</p>
+                            </div>
+
+                            <div
+                                class="timeline-dot w-6 h-6 rounded-full bg-blue-500 border-4 border-white dark:border-gray-800 shadow-lg z-10 hidden lg:block">
+                            </div>
+
+                            <div class="lg:w-1/2 lg:pl-12 animate-fade-in-right">
+                                <div
+                                    class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-6 sm:p-8 transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                                    <ul class="space-y-3 text-gray-600 dark:text-gray-300">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                            <span>Managed all technical operations of the Gadgetaloy
+                                                website and digital platforms</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                            <span>Led the development of the Gadgetaloy Inventory Grid</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                            <span>Handled software development, troubleshooting, and
+                                                technical issue resolution</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Experience Item 2 -->
+                        <div class="timeline-item flex flex-col lg:flex-row items-center">
+                            <div class="lg:w-1/2 lg:pr-12 mb-8 lg:mb-0 lg:text-right animate-fade-in-left">
+                                <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white">
+                                    Full-Stack Developer
+                                </h3>
+                                <p class="text-blue-500 font-medium text-lg sm:text-xl">Freelance</p>
+                                <p class="text-gray-600 dark:text-gray-400">2022 - Present</p>
+                            </div>
+
+                            <div
+                                class="timeline-dot w-6 h-6 rounded-full bg-blue-500 border-4 border-white dark:border-gray-800 shadow-lg z-10 hidden lg:block">
+                            </div>
+
+                            <div class="lg:w-1/2 lg:pl-12 animate-fade-in-right">
+                                <div
+                                    class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-6 sm:p-8 transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                                    <ul class="space-y-3 text-gray-600 dark:text-gray-300">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                            <span>Developed multiple full-stack web applications for clients</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                            <span>Collaborated with designers to implement responsive UI/UX</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                            <span>Integrated payment gateways and third-party APIs</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Experience Items -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 lg:py-24 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+                class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-800 dark:text-white mb-12 lg:mb-16">
+                My Projects
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div
+                    class="project-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up">
+                    <div
+                        class="project-image h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/10"></div>
+                        <img src="assets/project1.jpg" alt="Gadgetaloy Inventory Grid"
+                            class="w-full h-full object-cover"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div class="absolute inset-0 flex items-center justify-center hidden">
+                            <i class="fas fa-boxes text-white text-5xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
+                            Gadgetaloy Inventory Grid
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            A full-featured inventory management system built with Laravel, PHP,
+                            and MySQL.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 text-xs px-3 py-1 rounded-full">Laravel</span>
+                            <span
+                                class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 text-xs px-3 py-1 rounded-full">PHP</span>
+                            <span
+                                class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 text-xs px-3 py-1 rounded-full">MySQL</span>
+                        </div>
+                        <a href="https://github.com/nusrulnakibnahid/Gadgetaloy-Inventory-Gird" target="_blank"
+                            class="text-blue-500 hover:text-blue-600 font-medium flex items-center transition-colors duration-300">
+                            View Project
+                            <i
+                                class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up"
+                    style="animation-delay: 0.1s">
+                    <div
+                        class="project-image h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/10"></div>
+                        <img src="assets/Sunnah Sparks.png" alt="Sunnah Sparks" class="w-full h-full object-cover"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div class="absolute inset-0 flex items-center justify-center hidden">
+                            <i class="fas fa-book text-white text-5xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
+                            Sunnah Sparks
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            A random Hadith generator web application built with HTML, CSS, and
+                            JavaScript.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 text-xs px-3 py-1 rounded-full">HTML</span>
+                            <span
+                                class="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 text-xs px-3 py-1 rounded-full">CSS</span>
+                            <span
+                                class="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 text-xs px-3 py-1 rounded-full">JavaScript</span>
+                        </div>
+                        <a href="https://sunnah-sparks.netlify.app/" target="_blank"
+                            class="text-green-500 hover:text-green-600 font-medium flex items-center transition-colors duration-300">
+                            View Project
+                            <i
+                                class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up"
+                    style="animation-delay: 0.2s">
+                    <div
+                        class="project-image h-48 bg-gradient-to-br from-red-500 to-pink-600 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/10"></div>
+                        <img src="assets/boycott israyel.png" alt="Boycott Israel" class="w-full h-full object-cover"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div class="absolute inset-0 flex items-center justify-center hidden">
+                            <i class="fas fa-handshake text-white text-5xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
+                            Boycott Israel
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            A digital awareness project promoting the boycott of Israeli
+                            products.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300 text-xs px-3 py-1 rounded-full">HTML</span>
+                            <span
+                                class="bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300 text-xs px-3 py-1 rounded-full">CSS</span>
+                            <span
+                                class="bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300 text-xs px-3 py-1 rounded-full">JavaScript</span>
+                        </div>
+                        <a href="https://boycott-israel-product.vercel.app/" target="_blank"
+                            class="text-red-500 hover:text-red-600 font-medium flex items-center transition-colors duration-300">
+                            View Project
+                            <i
+                                class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 animate-fade-in-up" style="animation-delay: 0.3s">
+                <a href="https://github.com/nusrulnakibnahid" target="_blank"
+                    class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-md">
+                    <i class="fab fa-github mr-3 text-xl"></i>
+                    View All 20+ Projects on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-16 lg:py-24 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+                class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-800 dark:text-white mb-12 lg:mb-16">
+                Certifications
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div
+                    class="certification-card bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-6 sm:p-8 transition-all duration-500 transform hover:scale-105 hover:shadow-xl animate-fade-in-up">
+                    <div
+                        class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-code text-blue-500 text-2xl sm:text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white mb-3 text-center">
+                        Full Stack Web Development
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6 text-center">
+                        OSTAD - PHP, Laravel & Vue.js
+                    </p>
+                    <a href="https://drive.google.com/file/d/1mVDAX3hOLExW3gJMnIWCHC2P63If2KsK/view?usp=drive_link"
+                        target="_blank"
+                        class="text-blue-500 hover:text-blue-600 font-medium flex items-center justify-center transition-colors duration-300">
+                        View Certificate <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+
+                <div class="certification-card bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-6 sm:p-8 transition-all duration-500 transform hover:scale-105 hover:shadow-xl animate-fade-in-up"
+                    style="animation-delay: 0.1s">
+                    <div
+                        class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-palette text-green-500 text-2xl sm:text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white mb-3 text-center">
+                        Canva Essentials
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6 text-center">
+                        Canva Design School
+                    </p>
+                    <a href="https://drive.google.com/file/d/1h3RHAeQMUxSQgeqWp7g3wYCNbo71Fu4f/view?usp=drive_link"
+                        target="_blank"
+                        class="text-green-500 hover:text-green-600 font-medium flex items-center justify-center transition-colors duration-300">
+                        View Certificate <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+
+                <div class="certification-card bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-6 sm:p-8 transition-all duration-500 transform hover:scale-105 hover:shadow-xl animate-fade-in-up"
+                    style="animation-delay: 0.2s">
+                    <div
+                        class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-tasks text-purple-500 text-2xl sm:text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white mb-3 text-center">
+                        Agile Project Management
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6 text-center">
+                        HP LIFE online course
+                    </p>
+                    <a href="https://drive.google.com/file/d/1Drl5dbjy-Cmz6FigYDGf8WyCuqH7JszS/view?usp=drive_link"
+                        target="_blank"
+                        class="text-purple-500 hover:text-purple-600 font-medium flex items-center justify-center transition-colors duration-300">
+                        View Certificate <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+
+                </div>
+
+                <div class="center-container">
+                    <a href="https://drive.google.com/drive/folders/1vXb9Ceh73GHBMhZvj-Z4CL1MVljUP3i2" target="_blank"
+                        class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-md">
+                        <i class="fas fa-certificate mr-3 text-xl"></i>
+                        View All 50+ Certifications
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 lg:py-24 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+                class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-800 dark:text-white mb-12 lg:mb-16">
+                Get In Touch
+            </h2>
+
+            <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
+                <!-- Contact Information -->
+                <div class="lg:w-2/5">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 sm:p-8 lg:p-10">
+                        <h3
+                            class="text-2xl sm:text-3xl font-semibold text-gray-800 dark:text-white mb-8 text-center lg:text-left">
+                            Contact Information
+                        </h3>
+
+                        <div class="space-y-8">
+                            <div class="flex items-start space-x-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0 mt-1">
+                                    <i class="fas fa-map-marker-alt text-blue-500 text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 dark:text-white text-lg mb-1">
+                                        Address
+                                    </h4>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        Uttara Sector#09, Road#3/F, Wasa Staff Quarter,
+                                        Uttara-Dhaka:1230
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0 mt-1">
+                                    <i class="fas fa-phone text-blue-500 text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 dark:text-white text-lg mb-1">
+                                        Phone
+                                    </h4>
+                                    <p class="text-gray-600 dark:text-gray-300">+8801612605228</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0 mt-1">
+                                    <i class="fas fa-envelope text-blue-500 text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 dark:text-white text-lg mb-1">
+                                        Email
+                                    </h4>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        nusrulnakibnahid.mail@gmail.com
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+                            <h4
+                                class="font-semibold text-gray-800 dark:text-white text-lg mb-6 text-center lg:text-left">
+                                Follow Me
+                            </h4>
+
+                            <div class="flex justify-center lg:justify-start space-x-4">
+                                <!-- LinkedIn -->
+                                <a href="https://www.linkedin.com/in/nakib-nahid/" target="_blank"
+                                    class="social-link w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-blue-500 hover:text-white transition-all duration-300 transform hover:scale-110">
+                                    <i class="fab fa-linkedin-in text-lg"></i>
+                                </a>
+
+                                <!-- GitHub -->
+                                <a href="https://github.com/nusrulnakibnahid" target="_blank"
+                                    class="social-link w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-gray-800 dark:hover:bg-white hover:text-white dark:hover:text-gray-800 transition-all duration-300 transform hover:scale-110">
+                                    <i class="fab fa-github text-lg"></i>
+                                </a>
+
+                                <!-- Facebook -->
+                                <a href="https://www.facebook.com/nahid.restricted.fb" target="_blank"
+                                    class="social-link w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-blue-600 hover:text-white transition-all duration-300 transform hover:scale-110">
+                                    <i class="fab fa-facebook-f text-lg"></i>
+                                </a>
+
+                                <!-- Instagram -->
+                                <a href="https://www.instagram.com/nahid.restricted/" target="_blank"
+                                    class="social-link w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-pink-500 hover:text-white transition-all duration-300 transform hover:scale-110">
+                                    <i class="fab fa-instagram text-lg"></i>
+                                </a>
+
+                                <!-- WhatsApp -->
+                                <a href="https://wa.me/+8801612605228" target="_blank"
+                                    class="social-link w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-green-500 hover:text-white transition-all duration-300 transform hover:scale-110">
+                                    <i class="fab fa-whatsapp text-lg"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:w-3/5">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 sm:p-8 lg:p-10">
+                        <h3
+                            class="text-2xl sm:text-3xl font-semibold text-gray-800 dark:text-white mb-8 text-center lg:text-left">
+                            Send Me a Message
+                        </h3>
+
+                        <form id="contactForm" class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your
+                                        Name</label>
+                                    <input type="text" id="name"
+                                        class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                                        required />
+                                </div>
+
+                                <div>
+                                    <label for="email"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your
+                                        Email</label>
+                                    <input type="email" id="email"
+                                        class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                                        required />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="subject"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                                <input type="text" id="subject"
+                                    class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                                    required />
+                            </div>
+
+                            <div>
+                                <label for="message"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                                <textarea id="message" rows="5"
+                                    class="form-textarea w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                                    required></textarea>
+                            </div>
+
+                            <button type="submit"
+                                class="w-full bg-blue-500 hover:bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-md">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row justify-between items-center">
+                <div class="mb-6 lg:mb-0 text-center lg:text-left">
+                    <p class="text-gray-300 text-center">
+                        &copy; 2025 Nusrul Nakib Nahid. All rights reserved.
+                    </p>
+
+                </div>
+
+                <div class="flex space-x-6">
+                    <a href="https://www.linkedin.com/in/nakib-nahid/" target="_blank"
+                        class="text-gray-300 hover:text-white transition-colors duration-300 transform hover:scale-110">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="https://github.com/nusrulnakibnahid" target="_blank"
+                        class="text-gray-300 hover:text-white transition-colors duration-300 transform hover:scale-110">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="mailto:nusrulnakibnahid.mail@gmail.com"
+                        class="text-gray-300 hover:text-white transition-colors duration-300 transform hover:scale-110">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top -->
+    <a href="#home" id="backToTop" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
