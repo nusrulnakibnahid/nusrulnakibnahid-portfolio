@@ -1,4 +1,4 @@
-// Portfolio JavaScript - Complete Working Version
+// Portfolio JavaScript - Complete Working Version with Mobile Download CV
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Portfolio website initialization started...');
 
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ==========================================================================
-    // Mobile Menu Functionality - SIMPLE AND WORKING
+    // Mobile Menu Functionality - WITH DOWNLOAD CV
     // ==========================================================================
     console.log('Initializing mobile menu...');
     const mobileMenuButton = document.getElementById('mobileMenuButton');
@@ -74,6 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (mobileMenuButton && mobileMenu) {
         console.log('Mobile menu elements found');
+        
+        // Create mobile download CV button
+        createMobileDownloadCV();
         
         // Mobile menu toggle
         mobileMenuButton.addEventListener('click', function() {
@@ -135,8 +138,53 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('Mobile menu closed via Escape key');
             }
         });
+        
+        function createMobileDownloadCV() {
+            // Check if mobile download button already exists
+            if (document.querySelector('.mobile-download-cv')) return;
+            
+            const mobileDownloadCV = document.createElement('a');
+            mobileDownloadCV.href = 'assets/Nusrul Nakib Nahid\'s Resume.pdf';
+            mobileDownloadCV.className = 'mobile-download-cv';
+            mobileDownloadCV.setAttribute('download', '');
+            mobileDownloadCV.innerHTML = `
+                <i class="fas fa-download"></i>
+                Download CV
+            `;
+            
+            // Add click event for download tracking
+            mobileDownloadCV.addEventListener('click', function(e) {
+                showNotification('CV download started!', 'success');
+                console.log('Mobile CV download initiated');
+                
+                // Close mobile menu after download click
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('active');
+                    mobileMenuButton.querySelector('i').className = 'fas fa-bars';
+                    document.body.style.overflow = '';
+                }, 500);
+            });
+            
+            // Insert at the end of mobile menu
+            mobileMenu.appendChild(mobileDownloadCV);
+            console.log('Mobile download CV button created');
+        }
     } else {
         console.error('Mobile menu elements not found!');
+    }
+
+    // ==========================================================================
+    // Desktop Download CV Functionality
+    // ==========================================================================
+    console.log('Initializing desktop download CV...');
+    const downloadCV = document.getElementById('downloadCV');
+    
+    if (downloadCV) {
+        downloadCV.addEventListener('click', function(e) {
+            showNotification('CV download started!', 'success');
+            console.log('Desktop CV download initiated');
+        });
     }
 
     // ==========================================================================
@@ -161,6 +209,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 console.log('Smooth scroll to:', targetId);
+                
+                // Close mobile menu if open
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('active');
+                    mobileMenuButton.querySelector('i').className = 'fas fa-bars';
+                    document.body.style.overflow = '';
+                }
             }
         });
     });
@@ -247,19 +303,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
         }
-    }
-
-    // ==========================================================================
-    // CV Download functionality
-    // ==========================================================================
-    console.log('Initializing CV download...');
-    const downloadCV = document.getElementById('downloadCV');
-    
-    if (downloadCV) {
-        downloadCV.addEventListener('click', function(e) {
-            showNotification('CV download started!', 'success');
-            console.log('CV download initiated');
-        });
     }
 
     // ==========================================================================
