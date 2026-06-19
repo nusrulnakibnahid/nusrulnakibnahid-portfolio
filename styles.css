@@ -1200,6 +1200,135 @@ body {
   }
 }
 
+/* ==========================================
+   ABOUT SECTION MOBILE FIX
+========================================== */
+
+#about {
+    overflow-x: hidden;
+}
+
+#about p {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.about-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    width: 100%;
+    max-width: 100%;
+
+    padding: 16px;
+
+    background: #ffffff;
+    border-radius: 14px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
+
+    overflow: hidden;
+}
+
+.dark .about-card {
+    background: #374151;
+}
+
+.about-icon {
+    flex-shrink: 0;
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(59,130,246,.12);
+
+    color: #3b82f6;
+    font-size: 18px;
+}
+
+.about-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.about-info h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.about-info p {
+    font-size: .95rem;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.dark .about-info p {
+    color: #d1d5db;
+}
+
+.email-text {
+    word-break: break-all;
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 575px) {
+
+    #about .container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    #about .section-title {
+        font-size: 2rem;
+    }
+
+    #about .lg\:w-2\/5,
+    #about .lg\:w-3\/5 {
+        width: 100%;
+    }
+
+    #about img {
+        width: 290px;
+        height: 290px;
+        
+    }
+
+    #about p {
+        font-size: 16px;
+        line-height: 1.8;
+    }
+
+    .about-card {
+        padding: 14px;
+        gap: 12px;
+    }
+
+    .about-icon {
+        width: 46px;
+        height: 46px;
+        font-size: 16px;
+    }
+
+    .about-info h3 {
+        font-size: 15px;
+    }
+
+    .about-info p {
+        font-size: 14px;
+    }
+}
+
 /* Small (576px – 767px) */
 @media (min-width: 576px) and (max-width: 767.98px) {
   :root {
@@ -1253,7 +1382,7 @@ body {
   #home h1 { font-size: 2.75rem; }
   #home h2 { font-size: 1.5rem; }
 
-  #about .flex-col.lg\:flex-row { gap: 3rem; }
+  #about .flex-col.lg\:flex-row { gap: 3rem;}
 
   .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3 {
     grid-template-columns: repeat(2, 1fr);
