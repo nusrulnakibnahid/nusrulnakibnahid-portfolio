@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: 'JetBrains Mono', monospace;
   line-height: 1.6;
   overflow-x: hidden;
   transition: all 0.3s ease-in-out;
@@ -1276,6 +1276,91 @@ body {
   .mobile-download-cv { display: none !important; }
 
   .certifications-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ==========================================================================
+   Extra Large Devices (1200px - 1399px)
+   ========================================================================== */
+@media (min-width: 1200px) {
+  .container,
+  .max-w-7xl {
+    max-width: 1140px;
+    margin-inline: auto;
+  }
+
+  #home h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+  }
+
+  #home h2 {
+    font-size: 1.75rem;
+  }
+
+  .hero-orb-1 {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+/* ==========================================================================
+   XXL Devices (1400px - 1919px)
+   ========================================================================== */
+@media (min-width: 1400px) {
+  .container,
+  .max-w-7xl {
+    max-width: 1320px;
+    margin-inline: auto;
+  }
+
+  #home h1 {
+    font-size: 4.5rem;
+  }
+
+  #home h2 {
+    font-size: 2rem;
+  }
+
+  .hero-orb-1 {
+    width: 500px;
+    height: 500px;
+  }
+
+  .certifications-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ==========================================================================
+   Ultra Wide Screens (1920px+)
+   ========================================================================== */
+@media (min-width: 1920px) {
+  .container,
+  .max-w-7xl {
+    max-width: 1600px;
+    margin-inline: auto;
+  }
+
+  body {
+    font-size: 18px;
+  }
+
+  #home h1 {
+    font-size: 5rem;
+  }
+
+  #home h2 {
+    font-size: 2.2rem;
+  }
+
+  .hero-orb-1 {
+    width: 600px;
+    height: 600px;
+  }
+
+  .certifications-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 
 /* ==========================================================================
