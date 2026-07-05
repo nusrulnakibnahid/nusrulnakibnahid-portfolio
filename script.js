@@ -1,241 +1,74 @@
-// Portfolio JavaScript - Complete Working Version with Mobile Download CV
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Portfolio website initialization started...');
+// Portfolio JavaScript
+document.addEventListener('DOMContentLoaded', function () {
 
     // ==========================================================================
-    // Theme Toggle Functionality - SIMPLE AND WORKING
+    // Mobile Menu
     // ==========================================================================
-    console.log('Initializing theme toggle...');
-    const themeToggle = document.getElementById('themeToggle');
-    
-    if (themeToggle) {
-        console.log('Theme toggle button found');
-        
-        // Get current theme from localStorage or system preference
-        const savedTheme = localStorage.getItem('theme');
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
-        // Set initial theme
-        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-            document.documentElement.classList.add('dark');
-            updateThemeIcon('dark');
-            console.log('Dark theme applied');
-        } else {
-            document.documentElement.classList.remove('dark');
-            updateThemeIcon('light');
-            console.log('Light theme applied');
-        }
-        
-        // Theme toggle click handler
-        themeToggle.addEventListener('click', function() {
-            console.log('Theme toggle clicked');
-            
-            const html = document.documentElement;
-            const isDark = html.classList.contains('dark');
-            
-            if (isDark) {
-                // Switch to light mode
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                updateThemeIcon('light');
-                console.log('Switched to light mode');
-            } else {
-                // Switch to dark mode
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                updateThemeIcon('dark');
-                console.log('Switched to dark mode');
-            }
-        });
-        
-        function updateThemeIcon(theme) {
-            const icon = themeToggle.querySelector('i');
-            if (icon) {
-                if (theme === 'dark') {
-                    icon.className = 'fas fa-sun';
-                    themeToggle.setAttribute('title', 'Switch to light mode');
-                } else {
-                    icon.className = 'fas fa-moon';
-                    themeToggle.setAttribute('title', 'Switch to dark mode');
-                }
-                console.log('Theme icon updated to:', theme);
-            }
-        }
-    } else {
-        console.error('Theme toggle button not found!');
-    }
-
-    // ==========================================================================
-    // Mobile Menu Functionality - WITH DOWNLOAD CV
-    // ==========================================================================
-    console.log('Initializing mobile menu...');
     const mobileMenuButton = document.getElementById('mobileMenuButton');
     const mobileMenu = document.getElementById('mobileMenu');
-    
+
+    function closeMobileMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.remove('active');
+        if (mobileMenuButton) mobileMenuButton.querySelector('i').className = 'fas fa-bars';
+    }
+
     if (mobileMenuButton && mobileMenu) {
-        console.log('Mobile menu elements found');
-        
-        // Create mobile download CV button
-        createMobileDownloadCV();
-        
-        // Mobile menu toggle
-        mobileMenuButton.addEventListener('click', function() {
-            console.log('Mobile menu button clicked');
-            
-            // Toggle mobile menu visibility
-            const isHidden = mobileMenu.classList.contains('hidden');
-            
-            if (isHidden) {
-                // Show menu
-                mobileMenu.classList.remove('hidden');
-                mobileMenu.classList.add('active');
-                this.querySelector('i').className = 'fas fa-times';
-                document.body.style.overflow = 'hidden';
-                console.log('Mobile menu opened');
+        mobileMenuButton.addEventListener('click', function () {
+            const isActive = mobileMenu.classList.contains('active');
+            if (isActive) {
+                closeMobileMenu();
             } else {
-                // Hide menu
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('active');
-                this.querySelector('i').className = 'fas fa-bars';
-                document.body.style.overflow = '';
-                console.log('Mobile menu closed');
+                mobileMenu.classList.add('active');
+                mobileMenuButton.querySelector('i').className = 'fas fa-times';
             }
         });
-        
-        // Close menu when clicking on links
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('active');
-                mobileMenuButton.querySelector('i').className = 'fas fa-bars';
-                document.body.style.overflow = '';
-                console.log('Mobile menu closed via link click');
-            });
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!mobileMenu.contains(event.target) && 
-                !mobileMenuButton.contains(event.target) && 
-                !mobileMenu.classList.contains('hidden')) {
-                
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('active');
-                mobileMenuButton.querySelector('i').className = 'fas fa-bars';
-                document.body.style.overflow = '';
-                console.log('Mobile menu closed via outside click');
-            }
-        });
-        
-        // Close menu with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('active');
-                mobileMenuButton.querySelector('i').className = 'fas fa-bars';
-                document.body.style.overflow = '';
-                console.log('Mobile menu closed via Escape key');
-            }
-        });
-        
-        function createMobileDownloadCV() {
-            // Check if mobile download button already exists
-            if (document.querySelector('.mobile-download-cv')) return;
-            
-            const mobileDownloadCV = document.createElement('a');
-            mobileDownloadCV.href = 'assets/Nusrul Nakib Nahid\'s Resume.pdf';
-            mobileDownloadCV.className = 'mobile-download-cv';
-            mobileDownloadCV.setAttribute('download', '');
-            mobileDownloadCV.innerHTML = `
-                <i class="fas fa-download"></i>
-                Download CV
-            `;
-            
-            // Add click event for download tracking
-            mobileDownloadCV.addEventListener('click', function(e) {
-                showNotification('CV download started!', 'success');
-                console.log('Mobile CV download initiated');
-                
-                // Close mobile menu after download click
-                setTimeout(() => {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('active');
-                    mobileMenuButton.querySelector('i').className = 'fas fa-bars';
-                    document.body.style.overflow = '';
-                }, 500);
-            });
-            
-            // Insert at the end of mobile menu
-            mobileMenu.appendChild(mobileDownloadCV);
-            console.log('Mobile download CV button created');
-        }
-    } else {
-        console.error('Mobile menu elements not found!');
-    }
 
-    // ==========================================================================
-    // Desktop Download CV Functionality
-    // ==========================================================================
-    console.log('Initializing desktop download CV...');
-    const downloadCV = document.getElementById('downloadCV');
-    
-    if (downloadCV) {
-        downloadCV.addEventListener('click', function(e) {
-            showNotification('CV download started!', 'success');
-            console.log('Desktop CV download initiated');
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        document.addEventListener('click', function (event) {
+            if (!mobileMenu.contains(event.target) &&
+                !mobileMenuButton.contains(event.target) &&
+                mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') closeMobileMenu();
         });
     }
 
     // ==========================================================================
-    // Smooth Scrolling for Navigation Links
+    // Smooth Scroll + Active Nav Highlight
     // ==========================================================================
-    console.log('Initializing smooth scrolling...');
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            
             const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
+            if (targetId === '#' || targetId.length < 2) return;
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const targetPosition = targetElement.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-                
-                console.log('Smooth scroll to:', targetId);
-                
-                // Close mobile menu if open
-                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('active');
-                    mobileMenuButton.querySelector('i').className = 'fas fa-bars';
-                    document.body.style.overflow = '';
-                }
+                e.preventDefault();
+                const header = document.querySelector('.site-header');
+                const headerHeight = header ? header.offsetHeight : 0;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                closeMobileMenu();
             }
         });
     });
 
-    // ==========================================================================
-    // Active Navigation Link Highlighting
-    // ==========================================================================
-    console.log('Initializing active navigation...');
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
 
     function highlightNavLink() {
         const scrollY = window.pageYOffset;
-        
         sections.forEach(section => {
             const sectionHeight = section.offsetHeight;
-            const sectionTop = section.offsetTop - 100;
+            const sectionTop = section.offsetTop - 120;
             const sectionId = section.getAttribute('id');
-            
             if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
                 navLinks.forEach(link => {
                     link.classList.remove('active');
@@ -246,62 +79,102 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
     window.addEventListener('scroll', highlightNavLink);
+
+    // ==========================================================================
+    // Skill Progress Bar Animation
+    // ==========================================================================
+    const skillFills = document.querySelectorAll('.skill-fill');
+    if (skillFills.length > 0 && 'IntersectionObserver' in window) {
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const width = bar.getAttribute('data-width') + '%';
+                    setTimeout(() => { bar.style.width = width; }, 150);
+                    skillObserver.unobserve(bar);
+                }
+            });
+        }, { threshold: 0.3 });
+        skillFills.forEach(bar => skillObserver.observe(bar));
+    } else {
+        skillFills.forEach(bar => { bar.style.width = bar.getAttribute('data-width') + '%'; });
+    }
+
+    // ==========================================================================
+    // Project Filter (Coding vs CMS)
+    // ==========================================================================
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const projectCards = document.querySelectorAll('.project-card');
+    const projectsEmpty = document.getElementById('projectsEmpty');
+
+    function applyFilter(filter) {
+        let visibleCount = 0;
+        projectCards.forEach(card => {
+            const matches = card.getAttribute('data-cat') === filter;
+            card.classList.toggle('is-hidden', !matches);
+            if (matches) visibleCount++;
+        });
+        if (projectsEmpty) {
+            projectsEmpty.classList.toggle('visible', visibleCount === 0);
+        }
+    }
+
+    if (filterTabs.length > 0) {
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', function () {
+                filterTabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                this.classList.add('active');
+                this.setAttribute('aria-selected', 'true');
+                applyFilter(this.getAttribute('data-filter'));
+            });
+        });
+        // Initial state (Coding Projects active by default)
+        applyFilter('coding');
+    }
 
     // ==========================================================================
     // Contact Form Handling
     // ==========================================================================
-    console.log('Initializing contact form...');
     const contactForm = document.getElementById('contactForm');
-    
+
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
-            // Get form data
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Validate form
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
+
             if (!name || !email || !subject || !message) {
                 showNotification('Please fill in all fields.', 'error');
                 return;
             }
-            
+
             if (!isValidEmail(email)) {
                 showNotification('Please enter a valid email address.', 'error');
                 return;
             }
-            
-            // Show loading state
+
             const submitBtn = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
+            const originalHTML = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitBtn.disabled = true;
-            
-            // Simulate form submission
+
             setTimeout(() => {
-                console.log('Form submitted successfully');
-                
-                // Show success message
-                showNotification('Thank you for your message! I will get back to you soon.', 'success');
-                
-                // Reset form
+                showNotification("Thanks! Your message has been noted — I'll get back to you soon.", 'success');
                 contactForm.reset();
-                
-                // Reset button
-                submitBtn.innerHTML = originalText;
+                submitBtn.innerHTML = originalHTML;
                 submitBtn.disabled = false;
-            }, 2000);
+            }, 1600);
         });
-        
-        // Email validation function
+
         function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         }
     }
 
@@ -309,156 +182,38 @@ document.addEventListener('DOMContentLoaded', function() {
     // Notification System
     // ==========================================================================
     function showNotification(message, type = 'info') {
-        // Remove existing notification
-        const existingNotification = document.querySelector('.custom-notification');
-        if (existingNotification) {
-            existingNotification.remove();
-        }
-        
-        // Define colors based on type
-        const colors = {
-            success: 'bg-green-500',
-            error: 'bg-red-500',
-            info: 'bg-blue-500'
-        };
-        
-        // Create notification element
-        const notification = document.createElement('div');
-        notification.className = `custom-notification fixed top-4 right-4 ${colors[type] || colors.info} text-white p-4 rounded-lg shadow-lg max-w-sm z-50`;
-        notification.innerHTML = `
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'} mr-3"></i>
-                    <span class="notification-message">${message}</span>
-                </div>
-                <button class="notification-close ml-4 text-white hover:text-gray-200">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
+        const existing = document.querySelector('.notify-toast');
+        if (existing) existing.remove();
+
+        const icon = type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle';
+
+        const toast = document.createElement('div');
+        toast.className = 'notify-toast';
+        toast.style.cssText = `
+            position: fixed; top: 84px; right: 16px; z-index: 999;
+            background: #10140f; border: 1px solid ${type === 'error' ? '#ff5f56' : '#c6ff5c'};
+            color: #eef1ea; padding: 0.9rem 1.1rem; border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;
+            display: flex; align-items: center; gap: 0.6rem; max-width: 320px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.45);
         `;
-        
-        // Add close button functionality
-        const closeButton = notification.querySelector('.notification-close');
-        closeButton.addEventListener('click', () => {
-            notification.remove();
-        });
-        
-        // Auto remove after 5 seconds
-        setTimeout(() => {
-            if (notification.parentElement) {
-                notification.remove();
-            }
-        }, 5000);
-        
-        document.body.appendChild(notification);
-        console.log('Notification shown:', message);
+        toast.innerHTML = `<i class="fas fa-${icon}" style="color:${type === 'error' ? '#ff5f56' : '#c6ff5c'}"></i><span>${message}</span>`;
+
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 5000);
     }
 
     // ==========================================================================
-    // Skill Progress Animation
+    // Back to Top
     // ==========================================================================
-    console.log('Initializing skill animations...');
-    const skillProgresses = document.querySelectorAll('.skill-progress');
-    
-    if (skillProgresses.length > 0) {
-        const skillObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const progressBar = entry.target;
-                    const width = progressBar.getAttribute('data-width') + '%';
-                    
-                    // Animate to target width
-                    setTimeout(() => {
-                        progressBar.style.width = width;
-                    }, 200);
-                    
-                    skillObserver.unobserve(progressBar);
-                    console.log('Skill animation triggered');
-                }
-            });
-        }, { threshold: 0.3 });
-        
-        skillProgresses.forEach(bar => {
-            skillObserver.observe(bar);
-        });
-    }
-
-    // ==========================================================================
-    // Back to Top Button
-    // ==========================================================================
-    console.log('Initializing back to top button...');
     const backToTop = document.getElementById('backToTop');
-    
     if (backToTop) {
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 500) {
-                backToTop.classList.add('visible');
-                backToTop.classList.remove('opacity-0', 'invisible');
-            } else {
-                backToTop.classList.remove('visible');
-                backToTop.classList.add('opacity-0', 'invisible');
-            }
+            backToTop.classList.toggle('visible', window.pageYOffset > 500);
         });
-
-        backToTop.addEventListener('click', function(e) {
+        backToTop.addEventListener('click', function (e) {
             e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-            console.log('Back to top clicked');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-    } else {
-        console.log('Creating back to top button...');
-        createBackToTopButton();
     }
-    
-    function createBackToTopButton() {
-        const backToTop = document.createElement('a');
-        backToTop.id = 'backToTop';
-        backToTop.href = '#home';
-        backToTop.className = 'back-to-top fixed bottom-8 right-8 bg-blue-500 hover:bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 opacity-0 invisible z-40';
-        backToTop.innerHTML = '<i class="fas fa-chevron-up"></i>';
-        backToTop.setAttribute('aria-label', 'Back to top');
-        
-        backToTop.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        document.body.appendChild(backToTop);
-        
-        // Show/hide back to top button
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 500) {
-                backToTop.classList.remove('opacity-0', 'invisible');
-                backToTop.classList.add('opacity-100', 'visible');
-            } else {
-                backToTop.classList.remove('opacity-100', 'visible');
-                backToTop.classList.add('opacity-0', 'invisible');
-            }
-        });
-        
-        console.log('Back to top button created');
-    }
-
-    // ==========================================================================
-    // Image Loading Error Handling
-    // ==========================================================================
-    console.log('Initializing image error handling...');
-    document.querySelectorAll('img').forEach(img => {
-        img.addEventListener('error', function() {
-            this.style.display = 'none';
-            const fallback = this.nextElementSibling;
-            if (fallback && fallback.classList.contains('hidden')) {
-                fallback.style.display = 'flex';
-            }
-            console.log('Image load error, fallback activated');
-        });
-    });
-
-    console.log('Portfolio website initialized successfully! All features ready.');
 });

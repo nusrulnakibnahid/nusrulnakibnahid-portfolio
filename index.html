@@ -4,1791 +4,938 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="color-scheme" content="dark" />
     <title>Nusrul Nakib Nahid | Full-Stack Developer</title>
     <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%233b82f6%22/><text x=%2250%22 y=%2270%22 font-family=%22Arial, sans-serif%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22white%22>N</text></svg>" />
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23090c09%22/><text x=%2250%22 y=%2270%22 font-family=%22monospace%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22%23c6ff5c%22>N</text></svg>" />
 
-    <!-- 1) Prevent theme flash + set initial theme BEFORE any CSS loads -->
-    <script>
-        (function () {
-            try {
-                const setting = localStorage.getItem("theme") || "auto";
-                const prefersDark =
-                    window.matchMedia &&
-                    window.matchMedia("(prefers-color-scheme: dark)").matches;
-                const dark =
-                    setting === "dark" || (setting === "auto" && prefersDark);
-                const r = document.documentElement;
-                r.classList.toggle("dark", dark);
-                r.setAttribute("data-theme", dark ? "dark" : "light");
-            } catch (e) { }
-        })();
-    </script>
-
-    <!-- Tailwind CDN -->
+    <!-- Tailwind CDN (utility layout only — visual language lives in styles.css) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 2) Configure Tailwind dark mode for CDN (must be AFTER the CDN script) -->
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-        };
-    </script>
 
     <!-- Google Font - JetBrains Mono -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    referrerpolicy="no-referrer" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body class="bg-white dark:bg-gray-900 transition-colors duration-500">
-    <!-- Header & Navigation -->
-    <header
-        class="fixed top-0 left-0 w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-50 transition-all duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16 lg:h-20">
+<body>
 
-                <!-- Logo -->
-                <div class="flex items-center justify-center">
-                    <a href="#top" class="animate-gentle-float">
-                        <div
-                            class="w-30 h-30 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 xl:w-36 xl:h-36 max-w-40 max-h-40 rounded-full overflow-hidden">
-                            <img src="assets/Nahid logo 3.png" alt="Nakib Nahid" class="w-full h-full object-cover">
-                        </div>
-                    </a>
-                </div>
+    <!-- ================= Header ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="container header-inner">
+            <a href="#home" class="brand" aria-label="Back to top">
+                <span class="term-dots"><span></span><span></span><span></span></span>
+                <span class="brand-name">N.NAHID</span>
+            </a>
 
-                <!-- Desktop Navigation -->
-                <nav class="hidden lg:flex items-center space-x-8">
-                    <a href="#home"
-                        class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-300 flex items-center space-x-2">
-                        <i class="fas fa-home text-sm"></i>
-                        <span>Home</span>
-                    </a>
-                    <a href="#about"
-                        class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-300 flex items-center space-x-2">
-                        <i class="fas fa-user text-sm"></i>
-                        <span>About</span>
-                    </a>
-                    <a href="#skills"
-                        class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-300 flex items-center space-x-2">
-                        <i class="fas fa-code text-sm"></i>
-                        <span>Skills</span>
-                    </a>
-                    <a href="#experience"
-                        class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-300 flex items-center space-x-2">
-                        <i class="fas fa-briefcase text-sm"></i>
-                        <span>Experience</span>
-                    </a>
-                    <a href="#projects"
-                        class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-300 flex items-center space-x-2">
-                        <i class="fas fa-project-diagram text-sm"></i>
-                        <span>Projects</span>
-                    </a>
-                    <a href="#certifications"
-                        class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-300 flex items-center space-x-2">
-                        <i class="fas fa-certificate text-sm"></i>
-                        <span>Certifications</span>
-                    </a>
-                    <a href="#contact"
-                        class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-300 flex items-center space-x-2">
-                        <i class="fas fa-envelope text-sm"></i>
-                        <span>Contact</span>
-                    </a>
-                </nav>
+            <nav class="desktop-nav" aria-label="Primary">
+                <a href="#home" class="nav-link active"><i class="fas fa-terminal"></i><span>home</span></a>
+                <a href="#about" class="nav-link"><i class="fas fa-user"></i><span>about</span></a>
+                <a href="#skills" class="nav-link"><i class="fas fa-code"></i><span>skills</span></a>
+                <a href="#experience" class="nav-link"><i class="fas fa-briefcase"></i><span>experience</span></a>
+                <a href="#projects" class="nav-link"><i class="fas fa-diagram-project"></i><span>projects</span></a>
+                <a href="#certifications" class="nav-link"><i class="fas fa-certificate"></i><span>certs</span></a>
+                <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i><span>contact</span></a>
+            </nav>
 
-                <!-- Header Actions -->
-                <div class="flex items-center space-x-4">
-                    <!-- Theme Toggle -->
-                    <button id="themeToggle"
-                        class="theme-toggle w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-blue-500 hover:text-white dark:hover:bg-blue-600 flex items-center justify-center text-gray-600 dark:text-gray-300 transition-all duration-300 transform hover:scale-110 hover:rotate-12"
-                        aria-label="Toggle theme" aria-pressed="false" title="Theme: auto / dark / light">
-                        <i class="fas fa-moon text-sm lg:text-base"></i>
-                    </button>
-
-                    <!-- Download CV Button -->
-                    <a href="assets/Nusrul Nakib Nahid's Resume.pdf" id="downloadCV" download
-                        class="download-btn bg-blue-500 hover:bg-blue-600 text-white px-4 lg:px-6 py-2 lg:py-3 rounded-lg flex items-center space-x-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-md">
-                        <i class="fas fa-download text-sm lg:text-base"></i>
-                        <span class="text-sm lg:text-base font-medium">Download CV</span>
-                    </a>
-
-                    <!-- Mobile Menu Button -->
-                    <button id="mobileMenuButton"
-                        class="lg:hidden w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-300 transition-colors duration-300"
-                        aria-expanded="false" aria-controls="mobileMenu">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
+            <div class="header-actions">
+                <a href="assets/Nusrul Nakib Nahid's Resume.pdf" id="downloadCV" download class="ghost-link">
+                    <i class="fas fa-arrow-down"></i>
+                    <span>Download CV</span>
+                </a>
+                <button id="mobileMenuButton" class="icon-btn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobileMenu"
-            class="lg:hidden hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 transition-all duration-300 transform origin-top">
-            <div class="container mx-auto px-4 py-4">
-                <div class="flex flex-col space-y-3">
-                    <a href="#home"
-                        class="mobile-nav-link group text-gray-600 dark:text-gray-300 font-medium py-3 px-4 rounded-lg transition-all duration-300 flex items-center space-x-3 hover:bg-pink-50 dark:hover:bg-pink-900/20">
-                        <div
-                            class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center">
-                            <i class="fas fa-home text-white text-xs"></i>
-                        </div>
-                        <span class="group-hover:text-pink-500 dark:group-hover:text-pink-400">Home</span>
-                    </a>
-                    <a href="#about"
-                        class="mobile-nav-link group text-gray-600 dark:text-gray-300 font-medium py-3 px-4 rounded-lg transition-all duration-300 flex items-center space-x-3 hover:bg-blue-50 dark:hover:bg-blue-900/20">
-                        <div
-                            class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                            <i class="fas fa-user text-white text-xs"></i>
-                        </div>
-                        <span class="group-hover:text-blue-500 dark:group-hover:text-blue-400">About</span>
-                    </a>
-                    <a href="#skills"
-                        class="mobile-nav-link group text-gray-600 dark:text-gray-300 font-medium py-3 px-4 rounded-lg transition-all duration-300 flex items-center space-x-3 hover:bg-green-50 dark:hover:bg-green-900/20">
-                        <div
-                            class="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">
-                            <i class="fas fa-code text-white text-xs"></i>
-                        </div>
-                        <span class="group-hover:text-green-500 dark:group-hover:text-green-400">Skills</span>
-                    </a>
-                    <a href="#experience"
-                        class="mobile-nav-link group text-gray-600 dark:text-gray-300 font-medium py-3 px-4 rounded-lg transition-all duration-300 flex items-center space-x-3 hover:bg-orange-50 dark:hover:bg-orange-900/20">
-                        <div
-                            class="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center">
-                            <i class="fas fa-briefcase text-white text-xs"></i>
-                        </div>
-                        <span class="group-hover:text-orange-500 dark:group-hover:text-orange-400">Experience</span>
-                    </a>
-                    <a href="#projects"
-                        class="mobile-nav-link group text-gray-600 dark:text-gray-300 font-medium py-3 px-4 rounded-lg transition-all duration-300 flex items-center space-x-3 hover:bg-purple-50 dark:hover:bg-purple-900/20">
-                        <div
-                            class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center">
-                            <i class="fas fa-project-diagram text-white text-xs"></i>
-                        </div>
-                        <span class="group-hover:text-purple-500 dark:group-hover:text-purple-400">Projects</span>
-                    </a>
-                    <a href="#certifications"
-                        class="mobile-nav-link group text-gray-600 dark:text-gray-300 font-medium py-3 px-4 rounded-lg transition-all duration-300 flex items-center space-x-3 hover:bg-yellow-50 dark:hover:bg-yellow-900/20">
-                        <div
-                            class="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center">
-                            <i class="fas fa-certificate text-white text-xs"></i>
-                        </div>
-                        <span class="group-hover:text-yellow-500 dark:group-hover:text-yellow-400">Certifications</span>
-                    </a>
-                    <a href="#contact"
-                        class="mobile-nav-link group text-gray-600 dark:text-gray-300 font-medium py-3 px-4 rounded-lg transition-all duration-300 flex items-center space-x-3 hover:bg-teal-50 dark:hover:bg-teal-900/20">
-                        <div
-                            class="w-8 h-8 rounded-full bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center">
-                            <i class="fas fa-envelope text-white text-xs"></i>
-                        </div>
-                        <span class="group-hover:text-teal-500 dark:group-hover:text-teal-400">Contact</span>
-                    </a>
-                </div>
-            </div>
+        <div id="mobileMenu" class="mobile-menu">
+            <a href="#home" class="mobile-nav-link"><i class="fas fa-terminal"></i><span>home</span></a>
+            <a href="#about" class="mobile-nav-link"><i class="fas fa-user"></i><span>about</span></a>
+            <a href="#skills" class="mobile-nav-link"><i class="fas fa-code"></i><span>skills</span></a>
+            <a href="#experience" class="mobile-nav-link"><i class="fas fa-briefcase"></i><span>experience</span></a>
+            <a href="#projects" class="mobile-nav-link"><i class="fas fa-diagram-project"></i><span>projects</span></a>
+            <a href="#certifications" class="mobile-nav-link"><i class="fas fa-certificate"></i><span>certifications</span></a>
+            <a href="#contact" class="mobile-nav-link"><i class="fas fa-envelope"></i><span>contact</span></a>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home"
-        class="min-h-screen flex items-center pt-20 lg:pt-24 pb-16 lg:pb-20 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 relative overflow-hidden">
-
-        <!-- ★ 3D Hero Background ★ -->
-        <div class="hero-bg-3d" aria-hidden="true">
+    <!-- ================= Hero ================= -->
+    <section id="home" class="hero">
+        <div class="hero-bg" aria-hidden="true">
             <div class="hero-grid"></div>
             <div class="hero-orb hero-orb-1"></div>
             <div class="hero-orb hero-orb-2"></div>
-            <div class="hero-orb hero-orb-3"></div>
-            <div class="hero-shape hero-shape-1"></div>
-            <div class="hero-shape hero-shape-2"></div>
-            <div class="hero-shape hero-shape-3"></div>
-            <div class="hero-shape hero-shape-4"></div>
+            <span class="deco-diamond deco-diamond-1"></span>
+            <span class="deco-cross deco-cross-1"><i class="fas fa-crosshairs"></i></span>
         </div>
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
-                <!-- Hero Content -->
-                <div class="lg:w-1/2 text-center lg:text-left animate-fade-in-up">
-                    <h1
-                        class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-800 dark:text-white mb-4 lg:mb-6 leading-tight pt-8 sm:pt-0 mt-8 sm:mt-0">
-                        Nusrul Nakib <span class="text-blue-500">Nahid</span>
-                    </h1>
-                    <h2 class="typing-wrapper text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 lg:mb-8">
-    <span class="typing-text">Full-Stack Developer</span>
-</h2>
-                    <p
-                        class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-8 lg:mb-10 leading-relaxed max-w-2xl">
-                        Passionate about building clean, scalable, and efficient web
-                        applications. Skilled in Laravel, Vue.js, and modern web
-                        technologies with growing expertise in Python and Django.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#projects"
-                            class="btn-primary bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-md text-lg">View
-                            My Work</a>
-                        <a href="#contact"
-                            class="btn-secondary border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-lg">Contact
-                            Me</a>
-                    </div>
+
+        <div class="container hero-inner">
+            <div class="hero-content">
+                <span class="pill-badge">
+                    <span class="pulse-dot"></span>
+                    Available for opportunities
+                </span>
+
+                <h1 class="hero-title">
+                    Nusrul Nakib<br>
+                    <span class="accent-text">Nahid<span class="blink-cursor" aria-hidden="true"></span></span>
+                </h1>
+
+                <div class="prompt-tag">
+                    <span class="prompt-arrow">&gt;</span>
+                    <span class="typing-text">Full-Stack Developer</span>
                 </div>
 
-                <!-- Hero Image -->
-                <div class="lg:w-1/2 flex justify-center animate-fade-in-up" style="animation-delay: 0.3s">
-                    <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
-                        <div
-                            class="w-full h-full rounded-full bg-gradient-to-br from-blue-400 to-purple-600 p-1 shadow-2xl animate-float">
-                            <div
-                                class="w-full h-full rounded-full bg-white dark:bg-gray-800 overflow-hidden border-4 border-white dark:border-gray-800">
-                                <img src="assets/Updated image - nahid.jpg" alt="Nusrul Nakib Nahid"
-                                    class="w-full h-full object-cover"
-                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                                <div
-                                    class="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center hidden">
-                                    <i class="fas fa-user text-gray-400 text-6xl"></i>
-                                </div>
+                <p class="hero-desc">
+                    Building <strong>clean, scalable, pixel-perfect</strong> web applications —
+                    from <strong>Laravel</strong> back ends to <strong>Webflow</strong> front ends,
+                    with growing expertise in <strong>Python &amp; Django</strong>.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#projects" class="btn btn-primary"><i class="fas fa-plus"></i> View My Work</a>
+                    <a href="#contact" class="btn btn-outline"><i class="fas fa-comment-dots"></i> Contact Me</a>
+                </div>
+            </div>
+
+            <div class="hero-card-wrap">
+                <div class="term-card hero-card">
+                    <div class="term-card-head">
+                        <span class="term-dots"><span></span><span></span><span></span></span>
+                    </div>
+                    <div class="term-card-body">
+                        <div class="avatar-ring">
+                            <img src="assets/Updated image - nahid.jpg" alt="Nusrul Nakib Nahid"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                            <div class="avatar-fallback"><i class="fas fa-user"></i></div>
+                        </div>
+                        <h3 class="hero-card-name">Nusrul Nakib Nahid</h3>
+                        <p class="hero-card-role">// Full-Stack-Developer.exe</p>
+
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <span class="hero-stat-num">20+</span>
+                                <span class="hero-stat-label">Projects</span>
+                            </div>
+                            <div class="hero-stat">
+                                <span class="hero-stat-num">8+</span>
+                                <span class="hero-stat-label">Skills</span>
+                            </div>
+                            <div class="hero-stat">
+                                <span class="hero-stat-num">12+</span>
+                                <span class="hero-stat-label">Certs</span>
                             </div>
                         </div>
-
-                        <!-- Floating Elements -->
-                        <div
-                            class="absolute -top-4 -right-4 w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg animate-bounce-slow">
-                            <i class="fas fa-star text-white text-2xl"></i>
-                        </div>
-                        <div
-                            class="absolute -bottom-4 -left-4 w-16 h-16 bg-green-400 rounded-full flex items-center justify-center shadow-lg animate-pulse">
-                            <i class="fas fa-code text-white text-xl"></i>
-                        </div>
                     </div>
                 </div>
-
-                
             </div>
         </div>
     </section>
 
-    <!-- ★ MARQUEE SECTION — Tech Stack Infinite Scroll ★ -->
+    <!-- ================= Marquee ================= -->
     <section class="marquee-section" aria-label="Technology stack">
         <div class="marquee-wrapper">
-
-            <!-- Row 1 — scrolls LEFT: languages & frameworks -->
             <div class="marquee-track">
-                <!-- content block A -->
                 <div class="marquee-inner">
-                    <div class="marquee-item"><i class="fab fa-html5 text-orange-500"></i><span>HTML5</span></div>
+                    <div class="marquee-item"><i class="fab fa-html5"></i><span>HTML5</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fab fa-css3-alt text-blue-500"></i><span>CSS3</span></div>
+                    <div class="marquee-item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fab fa-js text-yellow-500"></i><span>JavaScript</span></div>
+                    <div class="marquee-item"><i class="fab fa-js"></i><span>JavaScript</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fab fa-php text-indigo-600"></i><span>PHP</span></div>
+                    <div class="marquee-item"><i class="fab fa-php"></i><span>PHP</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fab fa-laravel text-red-500"></i><span>Laravel</span></div>
+                    <div class="marquee-item"><i class="fab fa-laravel"></i><span>Laravel</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fab fa-vuejs text-green-500"></i><span>Vue.js</span></div>
+                    <div class="marquee-item"><i class="fab fa-vuejs"></i><span>Vue.js</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fab fa-python text-yellow-400"></i><span>Python</span></div>
+                    <div class="marquee-item"><i class="fab fa-python"></i><span>Python</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-dragon text-green-700"></i><span>Django</span></div>
+                    <div class="marquee-item"><i class="fas fa-dragon"></i><span>Django</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-database text-blue-600"></i><span>MySQL</span></div>
+                    <div class="marquee-item"><i class="fas fa-database"></i><span>MySQL</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-code-branch text-green-500"></i><span>REST API</span></div>
+                    <div class="marquee-item"><i class="fas fa-code-branch"></i><span>REST API</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-c text-blue-700"></i><span>C Language</span></div>
+                    <div class="marquee-item"><i class="fas fa-c"></i><span>C Language</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-layer-group text-purple-500"></i><span>Full-Stack Dev</span></div>
+                    <div class="marquee-item"><i class="fas fa-cloud"></i><span>Webflow</span></div>
                 </div>
-                <!-- content block B (duplicate for seamless loop) -->
                 <div class="marquee-inner" aria-hidden="true">
-                    <div class="marquee-item"><i class="fab fa-html5 text-orange-500"></i><span>HTML5</span></div>
+                    <div class="marquee-item"><i class="fab fa-html5"></i><span>HTML5</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fab fa-css3-alt text-blue-500"></i><span>CSS3</span></div>
+                    <div class="marquee-item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fab fa-js text-yellow-500"></i><span>JavaScript</span></div>
+                    <div class="marquee-item"><i class="fab fa-js"></i><span>JavaScript</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fab fa-php text-indigo-600"></i><span>PHP</span></div>
+                    <div class="marquee-item"><i class="fab fa-php"></i><span>PHP</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fab fa-laravel text-red-500"></i><span>Laravel</span></div>
+                    <div class="marquee-item"><i class="fab fa-laravel"></i><span>Laravel</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fab fa-vuejs text-green-500"></i><span>Vue.js</span></div>
+                    <div class="marquee-item"><i class="fab fa-vuejs"></i><span>Vue.js</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fab fa-python text-yellow-400"></i><span>Python</span></div>
+                    <div class="marquee-item"><i class="fab fa-python"></i><span>Python</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-dragon text-green-700"></i><span>Django</span></div>
+                    <div class="marquee-item"><i class="fas fa-dragon"></i><span>Django</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-database text-blue-600"></i><span>MySQL</span></div>
+                    <div class="marquee-item"><i class="fas fa-database"></i><span>MySQL</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-code-branch text-green-500"></i><span>REST API</span></div>
+                    <div class="marquee-item"><i class="fas fa-code-branch"></i><span>REST API</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-c text-blue-700"></i><span>C Language</span></div>
+                    <div class="marquee-item"><i class="fas fa-c"></i><span>C Language</span></div>
                     <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-layer-group text-purple-500"></i><span>Full-Stack Dev</span></div>
+                    <div class="marquee-item"><i class="fas fa-cloud"></i><span>Webflow</span></div>
                 </div>
             </div>
-
-            <!-- Row 2 — scrolls RIGHT: tools & soft skills -->
-            <div class="marquee-track-reverse">
-                <!-- content block A -->
-                <div class="marquee-inner">
-                    <div class="marquee-item"><i class="fab fa-git-alt text-orange-600"></i><span>Git</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fab fa-github text-gray-800 dark:text-white"></i><span>GitHub</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-code text-blue-500"></i><span>VS Code</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-cloud text-gray-700"></i><span>Vercel</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-credit-card text-purple-500"></i><span>Payment Gateway</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-people-group text-blue-500"></i><span>Teamwork</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-puzzle-piece text-emerald-500"></i><span>Problem Solving</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-comments text-indigo-500"></i><span>Communication</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-clock text-amber-500"></i><span>Time Management</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-arrows-rotate text-fuchsia-500"></i><span>Adaptability</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-shopping-cart text-orange-500"></i><span>Codecanyon</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-rocket text-blue-500"></i><span>Webflow</span></div>
-                </div>
-                <!-- content block B (duplicate for seamless loop) -->
-                <div class="marquee-inner" aria-hidden="true">
-                    <div class="marquee-item"><i class="fab fa-git-alt text-orange-600"></i><span>Git</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fab fa-github text-gray-800 dark:text-white"></i><span>GitHub</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-code text-blue-500"></i><span>VS Code</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-cloud text-gray-700"></i><span>Vercel</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-credit-card text-purple-500"></i><span>Payment Gateway</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-people-group text-blue-500"></i><span>Teamwork</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-puzzle-piece text-emerald-500"></i><span>Problem Solving</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-comments text-indigo-500"></i><span>Communication</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-clock text-amber-500"></i><span>Time Management</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-arrows-rotate text-fuchsia-500"></i><span>Adaptability</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-shopping-cart text-orange-500"></i><span>Codecanyon</span></div>
-                    <div class="marquee-dot"></div>
-                    <div class="marquee-item"><i class="fas fa-rocket text-blue-500"></i><span>Webflow</span></div>
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-16 lg:py-24 bg-gray-50 dark:bg-gray-800">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2
-                class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-800 dark:text-white mb-12 lg:mb-16">
-                About Me
-            </h2>
+    <!-- ================= About ================= -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="eyebrow"><span class="eyebrow-icon"><i class="fas fa-user"></i></span> // ABOUT-ME</div>
+            <h2 class="section-title">Who is <span class="accent-text">Nahid</span>?</h2>
 
-            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-                <!-- About Image -->
-                <div class="lg:w-2/5 flex justify-center">
-                    <div
-                        class="relative w-92 h-92 sm:w-80 sm:h-90 lg:w-96 lg:h-96 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
+            <div class="about-grid">
+                <div class="about-photo-wrap">
+                    <div class="about-photo">
                         <img src="assets/Nahid image.jpg" alt="About Nusrul Nakib Nahid"
-                            class="w-full h-full object-cover"
                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                        <div
-                            class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center hidden">
-                            <i class="fas fa-user-tie text-white text-6xl"></i>
-                        </div>
+                        <div class="about-photo-fallback"><i class="fas fa-user-tie"></i></div>
                     </div>
+                    <span class="deco-cross corner-tl"><i class="fas fa-plus"></i></span>
+                    <span class="deco-cross corner-br"><i class="fas fa-plus"></i></span>
                 </div>
 
-                <!-- About Content -->
-                <div class="lg:w-3/5">
-                    <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-                        I am a Software Engineering graduate from Daffodil International
-                        University with a strong passion for full-stack web development.
-                        Throughout my studies, I completed several personal and
-                        academic projects that demonstrate my practical understanding of
-                        real-world software development. I am eager to apply my technical knowledge and creativity in a
-                        professional environment to contribute to impactful projects and
-                        continue growing as a developer.
+                <div class="about-content">
+                    <p class="about-text">
+                        I am a Software Engineering graduate from <strong>Daffodil International University</strong>
+                        with a strong passion for full-stack web development. Throughout my studies, I completed
+                        several personal and academic projects that demonstrate my practical understanding of
+                        real-world software development. I am eager to apply my technical knowledge and creativity
+                        in a professional environment to contribute to impactful projects and continue growing as a
+                        developer.
                     </p>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-                        <div
-                            class="flex items-center space-x-4 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-                            <div
-                                class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                                <i class="fas fa-graduation-cap text-blue-500 text-lg"></i>
-                            </div>
+                    <div class="info-card-grid">
+                        <div class="info-card">
+                            <div class="info-card-icon"><i class="fas fa-graduation-cap"></i></div>
                             <div>
-                                <h3 class="font-semibold text-gray-800 dark:text-white">
-                                    Education
-                                </h3>
-                                <p class="text-gray-600 dark:text-gray-300">
-                                    B.Sc in Software Engineering
-                                </p>
+                                <h3>Education</h3>
+                                <p>B.Sc in Software Engineering</p>
                             </div>
                         </div>
-
-                        <div
-                            class="flex items-center space-x-4 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-                            <div
-                                class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                                <i class="fas fa-map-marker-alt text-blue-500 text-lg"></i>
-                            </div>
+                        <div class="info-card">
+                            <div class="info-card-icon"><i class="fas fa-map-marker-alt"></i></div>
                             <div>
-                                <h3 class="font-semibold text-gray-800 dark:text-white">
-                                    Location
-                                </h3>
-                                <p class="text-gray-600 dark:text-gray-300">
-                                    Uttara, Dhaka, Bangladesh
-                                </p>
+                                <h3>Location</h3>
+                                <p>Uttara, Dhaka, Bangladesh</p>
                             </div>
                         </div>
-
-                        <div
-                            class="flex items-center space-x-4 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-                            <div
-                                class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                                <i class="fas fa-briefcase text-blue-500 text-lg"></i>
-                            </div>
+                        <div class="info-card">
+                            <div class="info-card-icon"><i class="fas fa-briefcase"></i></div>
                             <div>
-                                <h3 class="font-semibold text-gray-800 dark:text-white">
-                                    Work Experience
-                                </h3>
-                                <p class="text-gray-600 dark:text-gray-300">
-                                    Webflow Developer at Softvence
-                                </p>
+                                <h3>Work Experience</h3>
+                                <p>Webflow Developer @ Softvence</p>
                             </div>
                         </div>
-
-                        <div
-                            class="flex items-center space-x-4 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-                            <div
-                                class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                                <i class="fas fa-envelope text-blue-500 text-lg"></i>
-                            </div>
+                        <div class="info-card">
+                            <div class="info-card-icon"><i class="fas fa-envelope"></i></div>
                             <div>
-                                <h3 class="font-semibold text-gray-800 dark:text-white">
-                                    Email
-                                </h3>
-                                <p class="text-gray-600 dark:text-gray-300">
-                                    nusrulnakibnahid.mail@gmail.com
-                                </p>
+                                <h3>Email</h3>
+                                <p class="break-all">nusrulnakibnahid.mail@gmail.com</p>
                             </div>
                         </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-16 lg:py-24 bg-white dark:bg-gray-900">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2
-                class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-800 dark:text-white mb-12 lg:mb-16">
-                Skills & Expertise
-            </h2>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-16 lg:mb-20">
-                <!-- Technical Skills -->
-                <div class="animate-fade-in-left">
-                    <h3 class="text-2xl sm:text-3xl font-semibold text-gray-800 dark:text-white mb-8 flex items-center">
-                        <i class="fas fa-laptop-code text-blue-500 mr-4 text-3xl"></i>
-                        Technical Skills
-                    </h3>
-
-                    <div class="space-y-6">
-                        <!-- C -->
-                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center space-x-3">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                                        <i class="fas fa-c text-blue-600"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-300">C</span>
-                                </div>
-                                <span class="text-blue-500 font-semibold">65%</span>
-                            </div>
-                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                                    data-width="65"></div>
-                            </div>
-                        </div>
-
-                        <!-- HTML -->
-                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center space-x-3">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900 flex items-center justify-center">
-                                        <i class="fab fa-html5 text-orange-500"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-300">HTML</span>
-                                </div>
-                                <span class="text-blue-500 font-semibold">85%</span>
-                            </div>
-                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                                    data-width="85"></div>
-                            </div>
-                        </div>
-
-                        <!-- CSS -->
-                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center space-x-3">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                                        <i class="fab fa-css3-alt text-blue-500"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-300">CSS</span>
-                                </div>
-                                <span class="text-blue-500 font-semibold">70%</span>
-                            </div>
-                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                                    data-width="90"></div>
-                            </div>
-                        </div>
-
-                        <!-- JavaScript -->
-                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center space-x-3">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center">
-                                        <i class="fab fa-js text-yellow-500"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-300">JavaScript</span>
-                                </div>
-                                <span class="text-blue-500 font-semibold">60%</span>
-                            </div>
-                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                                    data-width="60"></div>
-                            </div>
-                        </div>
-
-                        <!-- PHP -->
-                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center space-x-3">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center">
-                                        <i class="fab fa-php text-indigo-600"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-300">PHP</span>
-                                </div>
-                                <span class="text-blue-500 font-semibold">70%</span>
-                            </div>
-                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                                    data-width="70"></div>
-                            </div>
-                        </div>
-
-                        <!-- Laravel -->
-                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center space-x-3">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center">
-                                        <i class="fab fa-laravel text-red-500"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-300">Laravel</span>
-                                </div>
-                                <span class="text-blue-500 font-semibold">80%</span>
-                            </div>
-                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                                    data-width="80"></div>
-                            </div>
-                        </div>
-
-                        <!-- Vue.js -->
-                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center space-x-3">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
-                                        <i class="fab fa-vuejs text-green-600"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-300">Vue.js</span>
-                                </div>
-                                <span class="text-blue-500 font-semibold">50%</span>
-                            </div>
-                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                                    data-width="50"></div>
-                            </div>
-                        </div>
-
-                        <!-- Python & Django -->
-                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center space-x-3">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center">
-                                        <i class="fab fa-python text-yellow-500"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-300">Python & Django</span>
-                                </div>
-                                <span class="text-blue-500 font-semibold">50%</span>
-                            </div>
-                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                                    data-width="50"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Soft Skills -->
-                <div class="animate-fade-in-right">
-                    <h3 class="text-2xl sm:text-3xl font-semibold text-gray-800 dark:text-white mb-8 flex items-center">
-                        <i class="fas fa-users text-blue-500 mr-4 text-3xl"></i>
-                        Soft Skills
-                    </h3>
-
-                    <div class="space-y-6">
-                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center space-x-3">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                                        <i class="fas fa-people-group text-blue-600"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-300">Teamwork &amp;
-                                        Collaboration</span>
-                                </div>
-                                <span class="text-blue-500 font-semibold">95%</span>
-                            </div>
-                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                                    data-width="95"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center space-x-3">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center">
-                                        <i class="fas fa-puzzle-piece text-emerald-600"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-300">Problem Solving</span>
-                                </div>
-                                <span class="text-blue-500 font-semibold">50%</span>
-                            </div>
-                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                                    data-width="50"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center space-x-3">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center">
-                                        <i class="fas fa-comments text-indigo-600"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-300">Communication</span>
-                                </div>
-                                <span class="text-blue-500 font-semibold">80%</span>
-                            </div>
-                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                                    data-width="80"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center space-x-3">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center">
-                                        <i class="fas fa-clock text-amber-500"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-300">Time Management</span>
-                                </div>
-                                <span class="text-blue-500 font-semibold">95%</span>
-                            </div>
-                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                                    data-width="85"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item p-4 rounded-xl bg-white dark:bg-gray-800 shadow-md">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center space-x-3">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-fuchsia-100 dark:bg-fuchsia-900 flex items-center justify-center">
-                                        <i class="fas fa-arrows-rotate text-fuchsia-600"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-300">Adaptability</span>
-                                </div>
-                                <span class="text-blue-500 font-semibold">90%</span>
-                            </div>
-                            <div class="skill-bar h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                <div class="skill-progress h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                                    data-width="90"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tools & Technologies -->
-            <div class="animate-fade-in-up">
-                <h3 class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 dark:text-white mb-12">
-                    Tools & Technologies
-                </h3>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
-                    <!-- Git -->
-                    <div
-                        class="tool-item bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-                        <i class="fab fa-git-alt text-orange-500 text-3xl sm:text-4xl mb-3"></i>
-                        <span class="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">Git</span>
-                    </div>
-
-                    <!-- GitHub -->
-                    <div
-                        class="tool-item bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-                        <i class="fab fa-github text-gray-800 dark:text-white text-3xl sm:text-4xl mb-3"></i>
-                        <span class="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">GitHub</span>
-                    </div>
-
-                    <!-- VS Code -->
-                    <div
-                        class="tool-item bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-                        <i class="fas fa-code text-blue-500 text-3xl sm:text-4xl mb-3"></i>
-                        <span class="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">VS Code</span>
-                    </div>
-
-                    <!-- Vercel -->
-                    <div
-                        class="tool-item bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-                        <i class="fas fa-cloud text-black dark:text-white text-3xl sm:text-4xl mb-3"></i>
-                        <span class="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">Vercel</span>
-                    </div>
-
-                    <!-- MySQL -->
-                    <div
-                        class="tool-item bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-                        <i class="fas fa-database text-blue-500 text-3xl sm:text-4xl mb-3"></i>
-                        <span class="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">MySQL</span>
-                    </div>
-
-                    <!-- REST API -->
-                    <div
-                        class="tool-item bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-                        <i class="fas fa-code-branch text-green-500 text-3xl sm:text-4xl mb-3"></i>
-                        <span class="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">REST API</span>
-                    </div>
-
-                    <!-- Payment Gateway -->
-                    <div
-                        class="tool-item bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-                        <i class="fas fa-credit-card text-purple-500 text-3xl sm:text-4xl mb-3"></i>
-                        <span class="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">Payment
-                            Gateway</span>
-                    </div>
-
-                    <!-- Codecanyon -->
-                    <div
-                        class="tool-item bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-                        <i class="fas fa-shopping-cart text-orange-500 text-3xl sm:text-4xl mb-3"></i>
-                        <span
-                            class="text-gray-700 dark:text-gray-300 font-medium text-sm sm:text-base">Codecanyon</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="py-16 lg:py-24 bg-gray-50 dark:bg-gray-800">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2
-            class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-800 dark:text-white mb-12 lg:mb-16">
-            Work Experience
-        </h2>
+    <!-- ================= Skills ================= -->
+    <section id="skills" class="section section-alt">
+        <div class="container">
+            <div class="eyebrow"><span class="eyebrow-icon"><i class="fas fa-layer-group"></i></span> // SKILLS-AND-EXPERTISE</div>
+            <h2 class="section-title">Tools of the <span class="accent-text">Trade</span></h2>
+            <p class="section-subtitle">A breakdown of the languages, frameworks, and soft skills I bring to every project.</p>
 
-        <div class="max-w-4xl mx-auto">
-            <div class="relative">
-                <!-- Timeline vertical line -->
-                <div
-                    class="timeline-line absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-500 to-purple-600 hidden lg:block">
-                </div>
-
-                <div class="space-y-12 lg:space-y-16">
-                    <!-- Experience Item 1: Softvence -->
-                    <div class="timeline-item flex flex-col lg:flex-row items-center">
-                        <!-- Left side: only logo (square, larger) -->
-                        <div class="lg:w-1/2 lg:pr-12 mb-8 lg:mb-0 lg:text-right animate-fade-in-left">
-                            <div class="flex justify-center lg:justify-end">
-                                <img src="assets/Softvencelogo.png" alt="Softvence logo"
-                                    class="w-60 h-60 object-contain bg-white dark:bg-gray-800 shadow-md">
-                            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3 class="skill-card-title"><i class="fas fa-laptop-code"></i> Technical Skills</h3>
+                    <div class="skill-rows">
+                        <div class="skill-row">
+                            <div class="skill-row-head"><span>C</span><span class="skill-pct">65%</span></div>
+                            <div class="skill-track"><div class="skill-fill" data-width="65"></div></div>
                         </div>
-
-                        <!-- Timeline dot (visible on large screens) -->
-                        <div
-                            class="timeline-dot w-6 h-6 rounded-full bg-blue-500 border-4 border-white dark:border-gray-800 shadow-lg z-10 hidden lg:block">
+                        <div class="skill-row">
+                            <div class="skill-row-head"><span>HTML</span><span class="skill-pct">85%</span></div>
+                            <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
                         </div>
-
-                        <!-- Right side: company name, role, date, points -->
-                        <div class="lg:w-1/2 lg:pl-12 animate-fade-in-right">
-                            <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-6 sm:p-8 transition-all duration-300 hover:shadow-xl">
-                                <h3 class="text-3xl font-semibold text-gray-800 dark:text-white">Softvence</h3>
-                                <p class="text-blue-500 font-medium text-lg mb-1">Webflow Developer</p>
-                                <p class="text-gray-600 dark:text-gray-400 mb-4">April 2026 – Present</p>
-                                <ul class="space-y-3 text-gray-600 dark:text-gray-300">
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                                        <span>Developed fully responsive websites using Webflow, ensuring cross‑browser compatibility and pixel‑perfect design.</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                                        <span>Collaborated with designers and stakeholders to translate Figma/XD mockups into interactive, high‑performance web experiences.</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                                        <span>Optimized site performance, SEO structure, and implemented custom code (HTML/CSS/JS) to extend Webflow’s functionality.</span>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="skill-row">
+                            <div class="skill-row-head"><span>CSS</span><span class="skill-pct">90%</span></div>
+                            <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-head"><span>JavaScript</span><span class="skill-pct">60%</span></div>
+                            <div class="skill-track"><div class="skill-fill" data-width="60"></div></div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-head"><span>PHP</span><span class="skill-pct">70%</span></div>
+                            <div class="skill-track"><div class="skill-fill" data-width="70"></div></div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-head"><span>Laravel</span><span class="skill-pct">80%</span></div>
+                            <div class="skill-track"><div class="skill-fill" data-width="80"></div></div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-head"><span>Vue.js</span><span class="skill-pct">50%</span></div>
+                            <div class="skill-track"><div class="skill-fill" data-width="50"></div></div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-head"><span>Python &amp; Django</span><span class="skill-pct">50%</span></div>
+                            <div class="skill-track"><div class="skill-fill" data-width="50"></div></div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Experience Item 2: Gadgetaloy -->
-                    <div class="timeline-item flex flex-col lg:flex-row items-center">
-                        <!-- Left side: only logo (square, larger) -->
-                        <div class="lg:w-1/2 lg:pr-12 mb-8 lg:mb-0 lg:text-right animate-fade-in-left">
-                            <div class="flex justify-center lg:justify-end">
-                                <img src="assets/gadgetaloylogo.jpg" alt="Gadgetaloy logo"
-                                    class="w-60 h-60 object-contain bg-white dark:bg-gray-800 shadow-md">
-                            </div>
+                <div class="skill-card">
+                    <h3 class="skill-card-title"><i class="fas fa-users"></i> Soft Skills</h3>
+                    <div class="skill-rows">
+                        <div class="skill-row">
+                            <div class="skill-row-head"><span>Teamwork &amp; Collaboration</span><span class="skill-pct">95%</span></div>
+                            <div class="skill-track"><div class="skill-fill" data-width="95"></div></div>
                         </div>
-
-                        <div
-                            class="timeline-dot w-6 h-6 rounded-full bg-blue-500 border-4 border-white dark:border-gray-800 shadow-lg z-10 hidden lg:block">
+                        <div class="skill-row">
+                            <div class="skill-row-head"><span>Problem Solving</span><span class="skill-pct">50%</span></div>
+                            <div class="skill-track"><div class="skill-fill" data-width="50"></div></div>
                         </div>
-
-                        <div class="lg:w-1/2 lg:pl-12 animate-fade-in-right">
-                            <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-6 sm:p-8 transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
-                                <h3 class="text-3xl font-semibold text-gray-800 dark:text-white">Gadgetaloy</h3>
-                                <p class="text-blue-500 font-medium text-lg mb-1">Chief Technology Officer (CTO)</p>
-                                <p class="text-gray-600 dark:text-gray-400 mb-4">April 2025 – December 2025</p>
-                                <ul class="space-y-3 text-gray-600 dark:text-gray-300">
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                                        <span>Managed all technical operations of the Gadgetaloy website and digital platforms</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                                        <span>Led the development of the Gadgetaloy Inventory Grid</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                                        <span>Handled software development, troubleshooting, and technical issue resolution</span>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="skill-row">
+                            <div class="skill-row-head"><span>Communication</span><span class="skill-pct">80%</span></div>
+                            <div class="skill-track"><div class="skill-fill" data-width="80"></div></div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-head"><span>Time Management</span><span class="skill-pct">85%</span></div>
+                            <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+                        </div>
+                        <div class="skill-row">
+                            <div class="skill-row-head"><span>Adaptability</span><span class="skill-pct">90%</span></div>
+                            <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="tools-block">
+                <div class="eyebrow center"><span class="eyebrow-icon"><i class="fas fa-toolbox"></i></span> // TOOLS_&amp;_TECHNOLOGIES</div>
+                <div class="tools-grid">
+                    <div class="tool-item"><i class="fab fa-git-alt"></i><span>Git</span></div>
+                    <div class="tool-item"><i class="fab fa-github"></i><span>GitHub</span></div>
+                    <div class="tool-item"><i class="fas fa-code"></i><span>VS Code</span></div>
+                    <div class="tool-item"><i class="fas fa-cloud"></i><span>Vercel</span></div>
+                    <div class="tool-item"><i class="fas fa-database"></i><span>MySQL</span></div>
+                    <div class="tool-item"><i class="fas fa-code-branch"></i><span>REST API</span></div>
+                    <div class="tool-item"><i class="fas fa-credit-card"></i><span>Payment GW</span></div>
+                    <div class="tool-item"><i class="fas fa-shopping-cart"></i><span>Codecanyon</span></div>
+                    <div class="tool-item"><i class="fas fa-rocket"></i><span>Webflow</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= Experience ================= -->
+    <section id="experience" class="section">
+        <div class="container">
+            <div class="eyebrow"><span class="eyebrow-icon"><i class="fas fa-briefcase"></i></span> // WORK-EXPERIENCE</div>
+            <h2 class="section-title">Where I've <span class="accent-text">Built</span></h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-card">
+                        <div class="timeline-head">
+                            <h3><span class="accent-text">Webflow Developer</span> @ Softvence</h3>
+                            <span class="timeline-date">April 2026 – Present</span>
+                        </div>
+                        <ul class="timeline-list">
+                            <li><i class="fas fa-chevron-right"></i> Developed fully responsive websites using Webflow, ensuring cross-browser compatibility and pixel-perfect design.</li>
+                            <li><i class="fas fa-chevron-right"></i> Collaborated with designers and stakeholders to translate Figma/XD mockups into interactive, high-performance web experiences.</li>
+                            <li><i class="fas fa-chevron-right"></i> Optimized site performance, SEO structure, and implemented custom code (HTML/CSS/JS) to extend Webflow's functionality.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-card">
+                        <div class="timeline-head">
+                            <h3><span class="accent-text">Chief Technology Officer</span> @ Gadgetaloy</h3>
+                            <span class="timeline-date">April 2025 – December 2025</span>
+                        </div>
+                        <ul class="timeline-list">
+                            <li><i class="fas fa-chevron-right"></i> Managed all technical operations of the Gadgetaloy website and digital platforms.</li>
+                            <li><i class="fas fa-chevron-right"></i> Led the development of the Gadgetaloy Inventory Grid system.</li>
+                            <li><i class="fas fa-chevron-right"></i> Handled software development, troubleshooting, and technical issue resolution.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= Projects ================= -->
+    <!-- ================= Projects ================= -->
+<section id="projects" class="section section-alt">
+    <div class="container">
+        <div class="eyebrow"><span class="eyebrow-icon"><i class="fas fa-diagram-project"></i></span> // SELECTED-WORK</div>
+        <h2 class="section-title">My <span class="accent-text">Projects</span></h2>
+        <p class="section-subtitle">A selection from 20+ builds — split between hand-coded applications and Webflow/CMS builds.</p>
+
+        <!--
+            HOW TO ADD A CMS PROJECT:
+            1. Duplicate any <article class="project-card"> block below.
+            2. Set data-cat="cms" on that <article>.
+            3. Update the image, title, description, tags and link.
+            It will automatically show up under the "CMS Projects" filter.
+        -->
+        <div class="filter-tabs" role="tablist" aria-label="Project filter">
+            <button type="button" class="filter-tab active" data-filter="coding" role="tab" aria-selected="true">
+                <i class="fas fa-code"></i> Coding Projects
+            </button>
+            <button type="button" class="filter-tab" data-filter="cms" role="tab" aria-selected="false">
+                <i class="fas fa-layer-group"></i> CMS Projects
+            </button>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+
+            <!-- ========== CODING PROJECTS ========== -->
+            
+            <article class="project-card" data-cat="coding">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/gadgetaloy.jpg" alt="Gadgetaloy Inventory Grid"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-boxes"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>Gadgetaloy Inventory Grid</h3>
+                    <p>A full-featured inventory management system built with Laravel, PHP, and MySQL.</p>
+                    <div class="tag-row">
+                        <span class="tag">Laravel</span><span class="tag">PHP</span><span class="tag">MySQL</span>
+                    </div>
+                    <a href="https://github.com/nusrulnakibnahid/Gadgetaloy-Inventory-Gird" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" data-cat="coding">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/Sunnah Sparks.png" alt="Sunnah Sparks"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-book"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>Sunnah Sparks</h3>
+                    <p>A random Hadith generator web application built with HTML, CSS, and JavaScript.</p>
+                    <div class="tag-row">
+                        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+                    </div>
+                    <a href="https://sunnah-sparks.netlify.app/" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" data-cat="coding">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/boycott israyel.png" alt="Boycott Israel"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-handshake"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>Boycott Israel</h3>
+                    <p>A digital awareness project promoting the boycott of Israeli products.</p>
+                    <div class="tag-row">
+                        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+                    </div>
+                    <a href="https://boycott-israel-product.vercel.app/" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" data-cat="coding">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/invoice-genie.png" alt="Invoice Genie"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-file-invoice"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>Invoice Genie</h3>
+                    <p>Professional invoice generator with an easy-to-use interface for creating invoices.</p>
+                    <div class="tag-row">
+                        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+                    </div>
+                    <a href="https://invoice-genie.vercel.app/" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" data-cat="coding">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/real_madrid.png" alt="Real Madrid CF Clone"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-futbol"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>Real Madrid CF Clone</h3>
+                    <p>A sleek, lightweight football club website with smooth animations and responsive design.</p>
+                    <div class="tag-row">
+                        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+                    </div>
+                    <a href="https://real-madrid-cf-clone.netlify.app/" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" data-cat="coding">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/fresh-mart.png" alt="FreshMart Grocery Shop"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-shopping-cart"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>FreshMart Grocery Shop</h3>
+                    <p>Full-featured online grocery shop with authentication, cart, checkout, and admin panel.</p>
+                    <div class="tag-row">
+                        <span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Bootstrap</span><span class="tag">JavaScript</span>
+                    </div>
+                    <a href="https://github.com/nusrulnakibnahid/Online-Grocery-Shop---FreshMart" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" data-cat="coding">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/cashout-charge-bd.png" alt="Cashout Charge Counter BD"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-calculator"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>Cashout Charge Counter BD</h3>
+                    <p>Service charge calculator for BKASH, NAGAD, ROCKET, and UPAY mobile financial services.</p>
+                    <div class="tag-row">
+                        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+                    </div>
+                    <a href="https://cashout-charge-counter-bd.netlify.app/" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" data-cat="coding">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/fairshare.png" alt="FairShare Bill Splitter"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-receipt"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>FairShare Bill Splitter</h3>
+                    <p>User-friendly app that helps split bills fairly, with tax/tip calculations and custom splits.</p>
+                    <div class="tag-row">
+                        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+                    </div>
+                    <a href="https://github.com/nusrulnakibnahid/FairShare" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" data-cat="coding">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/book-management.png" alt="Online Bookshop Management"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-book-open"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>Online Bookshop Management</h3>
+                    <p>Bookshop management system with API integration for inventory, sales, and customers.</p>
+                    <div class="tag-row">
+                        <span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">JavaScript</span><span class="tag">API</span>
+                    </div>
+                    <a href="https://github.com/nusrulnakibnahid/Online-Bookshop-Management-with-HTML--CSS--JS--API--PHP-and-MySQL" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- ========== CMS PROJECTS ========== -->
+
+            <article class="project-card" data-cat="cms">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/khtwa.jpg" alt="Khtwa Project" 
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-globe"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>Khtwa Project</h3>
+                    <p>A Webflow CMS build with a modern, responsive design and dynamic content management.</p>
+                    <div class="tag-row">
+                        <span class="tag">Webflow</span><span class="tag">CMS</span><span class="tag">Responsive</span>
+                    </div>
+                    <a href="https://github.com/nusrulnakibnahid/khtwa-project" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" data-cat="cms">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/astra.jpg" alt="Astra Agency Project" 
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-building"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>Astra Agency</h3>
+                    <p>A professional agency website built with Webflow, featuring a clean and modern design.</p>
+                    <div class="tag-row">
+                        <span class="tag">Webflow</span><span class="tag">CMS</span><span class="tag">Agency</span>
+                    </div>
+                    <a href="https://github.com/nusrulnakibnahid/Astra-Agency-Project" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" data-cat="cms">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/kairo.jpg" alt="Kairo Portfolio Project" 
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-user-tie"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>Kairo Portfolio</h3>
+                    <p>A stunning portfolio website built with Webflow CMS, showcasing creative work with style.</p>
+                    <div class="tag-row">
+                        <span class="tag">Webflow</span><span class="tag">CMS</span><span class="tag">Portfolio</span>
+                    </div>
+                    <a href="https://github.com/nusrulnakibnahid/kairo-portfolio-project" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" data-cat="cms">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/alterx.jpg" alt="Alterx Project" 
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-cubes"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>Alterx Project</h3>
+                    <p>A Webflow CMS project with a unique design approach and seamless content management.</p>
+                    <div class="tag-row">
+                        <span class="tag">Webflow</span><span class="tag">CMS</span><span class="tag">Custom</span>
+                    </div>
+                    <a href="https://github.com/nusrulnakibnahid/alterx-project" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" data-cat="cms">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/arthea.jpg" alt="Arthea Project" 
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-palette"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>Arthea Project</h3>
+                    <p>An artistic Webflow CMS build with a focus on visual storytelling and dynamic content.</p>
+                    <div class="tag-row">
+                        <span class="tag">Webflow</span><span class="tag">CMS</span><span class="tag">Creative</span>
+                    </div>
+                    <a href="https://github.com/nusrulnakibnahid/arthea-project" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" data-cat="cms">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/caes.jpg" alt="Caes Com Simao Project" 
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-dog"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>Caes Com Simao</h3>
+                    <p>A Webflow CMS project for pet-related content with engaging design and easy management.</p>
+                    <div class="tag-row">
+                        <span class="tag">Webflow</span><span class="tag">CMS</span><span class="tag">Pet</span>
+                    </div>
+                    <a href="https://github.com/nusrulnakibnahid/caes-com-simao-project" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" data-cat="cms">
+                <div class="project-media">
+                    <span class="term-dots"><span></span><span></span><span></span></span>
+                    <img src="assets/sparklehome.jpg" alt="SparkleHome Project" 
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="project-media-fallback"><i class="fas fa-home"></i></div>
+                </div>
+                <div class="project-body">
+                    <h3>SparkleHome</h3>
+                    <p>A home services Webflow CMS website with a clean design and dynamic content management.</p>
+                    <div class="tag-row">
+                        <span class="tag">Webflow</span><span class="tag">CMS</span><span class="tag">Home Services</span>
+                    </div>
+                    <a href="https://github.com/nusrulnakibnahid/SparkleHome-Project" target="_blank" class="project-link">
+                        View Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="projects-empty" id="projectsEmpty">
+            <i class="fas fa-layer-group"></i>
+            <p>No CMS projects added yet — duplicate a card in the code and set <code>data-cat="cms"</code> to list your Webflow builds here.</p>
+        </div>
+
+        <div class="center-cta">
+            <a href="https://github.com/nusrulnakibnahid" target="_blank" class="btn btn-outline">
+                <i class="fab fa-github"></i> View All Projects on GitHub
+            </a>
         </div>
     </div>
 </section>
-    <!-- Projects Section -->
-    <section id="projects" class="py-16 lg:py-24 bg-white dark:bg-gray-900">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2
-                class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-800 dark:text-white mb-12 lg:mb-16">
-                My Projects
-            </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <div
-                    class="project-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up">
-                    <div
-                        class="project-image h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black/10"></div>
-                        <img src="assets/gadgetaloy.jpg" alt="Gadgetaloy Inventory Grid"
-                            class="w-full h-full object-cover"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                        <div class="absolute inset-0 flex items-center justify-center hidden">
-                            <i class="fas fa-boxes text-white text-5xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
-                            Gadgetaloy Inventory Grid
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            A full-featured inventory management system built with Laravel,
-                            PHP, and MySQL.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 text-xs px-3 py-1 rounded-full">Laravel</span>
-                            <span
-                                class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 text-xs px-3 py-1 rounded-full">PHP</span>
-                            <span
-                                class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 text-xs px-3 py-1 rounded-full">MySQL</span>
-                        </div>
-                        <a href="https://github.com/nusrulnakibnahid/Gadgetaloy-Inventory-Gird" target="_blank"
-                            class="text-blue-500 hover:text-blue-600 font-medium flex items-center transition-colors duration-300">
-                            View Project
-                            <i
-                                class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
-                        </a>
-                    </div>
+    <!-- ================= Certifications ================= -->
+    <section id="certifications" class="section">
+        <div class="container">
+            <div class="eyebrow"><span class="eyebrow-icon"><i class="fas fa-certificate"></i></span> // CERTIFICATIONS-&amp;-ACHIEVEMENTS</div>
+            <h2 class="section-title">Proof of <span class="accent-text">Practice</span></h2>
+
+            <div class="certs-grid">
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fas fa-code"></i></div>
+                    <h3>Full Stack Web Development</h3>
+                    <p>OSTAD — PHP, Laravel &amp; Vue.js</p>
+                    <a href="https://drive.google.com/file/d/1mVDAX3hOLExW3gJMnIWCHC2P63If2KsK/view?usp=drive_link" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
                 </div>
-
-                <!-- Project 2 -->
-                <div class="project-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up"
-                    style="animation-delay: 0.1s">
-                    <div
-                        class="project-image h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black/10"></div>
-                        <img src="assets/Sunnah Sparks.png" alt="Sunnah Sparks" class="w-full h-full object-cover"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                        <div class="absolute inset-0 flex items-center justify-center hidden">
-                            <i class="fas fa-book text-white text-5xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
-                            Sunnah Sparks
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            A random Hadith generator web application built with HTML, CSS,
-                            and JavaScript.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 text-xs px-3 py-1 rounded-full">HTML</span>
-                            <span
-                                class="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 text-xs px-3 py-1 rounded-full">CSS</span>
-                            <span
-                                class="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 text-xs px-3 py-1 rounded-full">JavaScript</span>
-                        </div>
-                        <a href="https://sunnah-sparks.netlify.app/" target="_blank"
-                            class="text-green-500 hover:text-green-600 font-medium flex items-center transition-colors duration-300">
-                            View Project
-                            <i
-                                class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
-                        </a>
-                    </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>21 Days of Code</h3>
+                    <p>Web Development Bootcamp</p>
+                    <a href="https://drive.google.com/file/d/1No1uFYGWP2LmNaECUV32rRK8pXoGfeP3/view?usp=drive_link" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
                 </div>
-
-                <!-- Project 3 -->
-                <div class="project-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up"
-                    style="animation-delay: 0.2s">
-                    <div
-                        class="project-image h-48 bg-gradient-to-br from-red-500 to-pink-600 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black/10"></div>
-                        <img src="assets/boycott israyel.png" alt="Boycott Israel" class="w-full h-full object-cover"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                        <div class="absolute inset-0 flex items-center justify-center hidden">
-                            <i class="fas fa-handshake text-white text-5xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
-                            Boycott Israel
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            A digital awareness project promoting the boycott of Israeli
-                            products.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300 text-xs px-3 py-1 rounded-full">HTML</span>
-                            <span
-                                class="bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300 text-xs px-3 py-1 rounded-full">CSS</span>
-                            <span
-                                class="bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300 text-xs px-3 py-1 rounded-full">JavaScript</span>
-                        </div>
-                        <a href="https://boycott-israel-product.vercel.app/" target="_blank"
-                            class="text-red-500 hover:text-red-600 font-medium flex items-center transition-colors duration-300">
-                            View Project
-                            <i
-                                class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
-                        </a>
-                    </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fab fa-linkedin"></i></div>
+                    <h3>LinkedIn for Students</h3>
+                    <p>Professional Networking</p>
+                    <a href="https://drive.google.com/file/d/19KaupjkG9kLFEP2gg3o2YrCmBZYwOjwi/view?usp=drive_link" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
                 </div>
-
-                <!-- Project 4 - Invoice Genie -->
-                <div class="project-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up"
-                    style="animation-delay: 0.3s">
-                    <div
-                        class="project-image h-48 bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black/10"></div>
-                        <img src="assets/invoice-genie.png" alt="Invoice Genie" class="w-full h-full object-cover"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                        <div class="absolute inset-0 flex items-center justify-center hidden">
-                            <i class="fas fa-file-invoice text-white text-5xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
-                            Invoice Genie
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Professional invoice generator with easy-to-use interface for
-                            creating professional invoices.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 text-xs px-3 py-1 rounded-full">HTML</span>
-                            <span
-                                class="bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 text-xs px-3 py-1 rounded-full">CSS</span>
-                            <span
-                                class="bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 text-xs px-3 py-1 rounded-full">JavaScript</span>
-                        </div>
-                        <a href="https://invoice-genie.vercel.app/" target="_blank"
-                            class="text-purple-500 hover:text-purple-600 font-medium flex items-center transition-colors duration-300">
-                            View Project
-                            <i
-                                class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
-                        </a>
-                    </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fas fa-search"></i></div>
+                    <h3>Art of Job Searching</h3>
+                    <p>Career Development</p>
+                    <a href="https://drive.google.com/file/d/1G7AW8UBKzipInlzbiK0QEggIJIlIGRm-/view?usp=sharing" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
                 </div>
-
-                <!-- Project 5 - Real Madrid CF Clone -->
-                <div class="project-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up"
-                    style="animation-delay: 0.4s">
-                    <div
-                        class="project-image h-48 bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black/10"></div>
-                        <img src="assets/real_madrid.png" alt="Real Madrid CF Clone" class="w-full h-full object-cover"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                        <div class="absolute inset-0 flex items-center justify-center hidden">
-                            <i class="fas fa-futbol text-white text-5xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
-                            Real Madrid CF Clone
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            A sleek, lightweight football club website with smooth
-                            animations, dynamic interactions, and fully responsive design.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="bg-yellow-100 dark:bg-yellow-900 text-yellow-600 dark:text-yellow-300 text-xs px-3 py-1 rounded-full">HTML</span>
-                            <span
-                                class="bg-yellow-100 dark:bg-yellow-900 text-yellow-600 dark:text-yellow-300 text-xs px-3 py-1 rounded-full">CSS</span>
-                            <span
-                                class="bg-yellow-100 dark:bg-yellow-900 text-yellow-600 dark:text-yellow-300 text-xs px-3 py-1 rounded-full">JavaScript</span>
-                        </div>
-                        <a href="https://real-madrid-cf-clone.netlify.app/" target="_blank"
-                            class="text-yellow-500 hover:text-yellow-600 font-medium flex items-center transition-colors duration-300">
-                            View Project
-                            <i
-                                class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
-                        </a>
-                    </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fab fa-laravel"></i></div>
+                    <h3>Laravel Journey</h3>
+                    <p>PHP Framework Mastery</p>
+                    <a href="https://drive.google.com/file/d/1UBrcsrt12u1-4m3VvhpWxabW-eydinTP/view?usp=sharing" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
                 </div>
-
-                <!-- Project 6 - FreshMart Grocery Shop -->
-                <div class="project-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up"
-                    style="animation-delay: 0.5s">
-                    <div
-                        class="project-image h-48 bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black/10"></div>
-                        <img src="assets/fresh-mart.png" alt="FreshMart Grocery Shop" class="w-full h-full object-cover"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                        <div class="absolute inset-0 flex items-center justify-center hidden">
-                            <i class="fas fa-shopping-cart text-white text-5xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
-                            FreshMart Grocery Shop
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Full-featured online grocery shop with secure authentication,
-                            cart system, checkout, and admin panel with real-time stats.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="bg-emerald-100 dark:bg-emerald-900 text-emerald-600 dark:text-emerald-300 text-xs px-3 py-1 rounded-full">PHP</span>
-                            <span
-                                class="bg-emerald-100 dark:bg-emerald-900 text-emerald-600 dark:text-emerald-300 text-xs px-3 py-1 rounded-full">MySQL</span>
-                            <span
-                                class="bg-emerald-100 dark:bg-emerald-900 text-emerald-600 dark:text-emerald-300 text-xs px-3 py-1 rounded-full">Bootstrap</span>
-                            <span
-                                class="bg-emerald-100 dark:bg-emerald-900 text-emerald-600 dark:text-emerald-300 text-xs px-3 py-1 rounded-full">JavaScript</span>
-                        </div>
-                        <a href="https://github.com/nusrulnakibnahid/Online-Grocery-Shop---FreshMart" target="_blank"
-                            class="text-emerald-500 hover:text-emerald-600 font-medium flex items-center transition-colors duration-300">
-                            View Project
-                            <i
-                                class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
-                        </a>
-                    </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3>UI/UX Design</h3>
+                    <p>Design Fundamentals</p>
+                    <a href="https://drive.google.com/file/d/1Uf2mvak6a4wYwJcrwYJ5gXOsEphdNhIe/view?usp=sharing" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
                 </div>
-
-                <!-- Project 7 - Cashout Charge Counter BD -->
-                <div class="project-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up"
-                    style="animation-delay: 0.6s">
-                    <div
-                        class="project-image h-48 bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black/10"></div>
-                        <img src="assets/cashout-charge-bd.png" alt="Cashout Charge Counter BD"
-                            class="w-full h-full object-cover"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                        <div class="absolute inset-0 flex items-center justify-center hidden">
-                            <i class="fas fa-calculator text-white text-5xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
-                            Cashout Charge Counter BD
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Service charge calculator for BKASH, NAGAD, ROCKET, and UPAY
-                            mobile financial services in Bangladesh.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="bg-cyan-100 dark:bg-cyan-900 text-cyan-600 dark:text-cyan-300 text-xs px-3 py-1 rounded-full">HTML</span>
-                            <span
-                                class="bg-cyan-100 dark:bg-cyan-900 text-cyan-600 dark:text-cyan-300 text-xs px-3 py-1 rounded-full">CSS</span>
-                            <span
-                                class="bg-cyan-100 dark:bg-cyan-900 text-cyan-600 dark:text-cyan-300 text-xs px-3 py-1 rounded-full">JavaScript</span>
-                        </div>
-                        <a href="https://cashout-charge-counter-bd.netlify.app/" target="_blank"
-                            class="text-cyan-500 hover:text-cyan-600 font-medium flex items-center transition-colors duration-300">
-                            View Project
-                            <i
-                                class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
-                        </a>
-                    </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Basic Electronics</h3>
+                    <p>Beginners Course</p>
+                    <a href="https://drive.google.com/file/d/1QavCtci4wbHDpusA93Y_xRP0eEtkT8Qq/view?usp=drive_link" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
                 </div>
-
-                <!-- Project 8 - FairShare Bill Splitter -->
-                <div class="project-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up"
-                    style="animation-delay: 0.7s">
-                    <div
-                        class="project-image h-48 bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black/10"></div>
-                        <img src="assets/fairshare.png" alt="FairShare Bill Splitter" class="w-full h-full object-cover"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                        <div class="absolute inset-0 flex items-center justify-center hidden">
-                            <i class="fas fa-receipt text-white text-5xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
-                            FairShare Bill Splitter
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            User-friendly web app that helps split bills fairly with
-                            friends, including tax and tips calculations with custom split
-                            options.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="bg-pink-100 dark:bg-pink-900 text-pink-600 dark:text-pink-300 text-xs px-3 py-1 rounded-full">HTML</span>
-                            <span
-                                class="bg-pink-100 dark:bg-pink-900 text-pink-600 dark:text-pink-300 text-xs px-3 py-1 rounded-full">CSS</span>
-                            <span
-                                class="bg-pink-100 dark:bg-pink-900 text-pink-600 dark:text-pink-300 text-xs px-3 py-1 rounded-full">JavaScript</span>
-                        </div>
-                        <a href="https://github.com/nusrulnakibnahid/FairShare" target="_blank"
-                            class="text-pink-500 hover:text-pink-600 font-medium flex items-center transition-colors duration-300">
-                            View Project
-                            <i
-                                class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
-                        </a>
-                    </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fab fa-node-js"></i></div>
+                    <h3>MERN Stack</h3>
+                    <p>Skills, Scope &amp; Benefits</p>
+                    <a href="https://drive.google.com/file/d/1rXDEJTr9Ojrewj4tcG2u4aQXrdZjLJ-_/view?usp=drive_link" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
                 </div>
-
-                <!-- Project 9 - Online Bookshop Management -->
-                <div class="project-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up"
-                    style="animation-delay: 0.8s">
-                    <div
-                        class="project-image h-48 bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black/10"></div>
-                        <img src="assets/book-management.png" alt="Online Bookshop Management"
-                            class="w-full h-full object-cover"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                        <div class="absolute inset-0 flex items-center justify-center hidden">
-                            <i class="fas fa-book-open text-white text-5xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
-                            Online Bookshop Management
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Comprehensive bookshop management system with API integration
-                            for inventory, sales, and customer management.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="bg-amber-100 dark:bg-amber-900 text-amber-600 dark:text-amber-300 text-xs px-3 py-1 rounded-full">PHP</span>
-                            <span
-                                class="bg-amber-100 dark:bg-amber-900 text-amber-600 dark:text-amber-300 text-xs px-3 py-1 rounded-full">MySQL</span>
-                            <span
-                                class="bg-amber-100 dark:bg-amber-900 text-amber-600 dark:text-amber-300 text-xs px-3 py-1 rounded-full">JavaScript</span>
-                            <span
-                                class="bg-amber-100 dark:bg-amber-900 text-amber-600 dark:text-amber-300 text-xs px-3 py-1 rounded-full">API</span>
-                        </div>
-                        <a href="https://github.com/nusrulnakibnahid/Online-Bookshop-Management-with-HTML--CSS--JS--API--PHP-and-MySQL"
-                            target="_blank"
-                            class="text-amber-500 hover:text-amber-600 font-medium flex items-center transition-colors duration-300">
-                            View Project
-                            <i
-                                class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
-                        </a>
-                    </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Cybersecurity</h3>
+                    <p>Learning from Incidents</p>
+                    <a href="https://drive.google.com/file/d/1l7doY8zeczPczDgEoxEHxX11nYRrr74o/view?usp=drive_link" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fas fa-database"></i></div>
+                    <h3>SQL Course</h3>
+                    <p>Database Management</p>
+                    <a href="https://drive.google.com/file/d/1PAjW3p-0oTmNkp-KVe_Vhd2MGqFsPn5X/view?usp=drive_link" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fab fa-google"></i></div>
+                    <h3>Google Cloud Operations</h3>
+                    <p>Scaling with GCP</p>
+                    <a href="https://drive.google.com/file/d/1dpvDJmce76C5C4LugmqP8VWP9lIuPXaz/view?usp=drive_link" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fas fa-cloud"></i></div>
+                    <h3>Cloud Computing</h3>
+                    <p>Fundamental Concepts</p>
+                    <a href="https://drive.google.com/file/d/1uA8oeUePS5AX0pVf_-4UC2OtRr-Cfwxc/view?usp=drive_link" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
                 </div>
             </div>
 
-            <div class="text-center mt-12 animate-fade-in-up" style="animation-delay: 0.3s">
-                <a href="https://github.com/nusrulnakibnahid" target="_blank"
-                    class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-md">
-                    <i class="fab fa-github mr-3 text-xl"></i>
-                    View All 20+ Projects on GitHub
+            <div class="center-cta">
+                <a href="https://drive.google.com/drive/folders/1vXb9Ceh73GHBMhZvj-Z4CL1MVljUP3i2" target="_blank" class="btn btn-primary">
+                    <i class="fas fa-certificate"></i> View All Certifications
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Certifications Section -->
-    <section id="certifications" class="py-16 lg:py-24 bg-gray-50 dark:bg-gray-900">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2
-                class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-800 dark:text-white mb-12 lg:mb-16">
-                Certifications & Achievements
-            </h2>
+    <!-- ================= Contact ================= -->
+    <section id="contact" class="section section-alt">
+        <div class="container">
+            <div class="eyebrow"><span class="eyebrow-icon"><i class="fas fa-paper-plane"></i></span> // GET-IN-TOUCH</div>
+            <h2 class="section-title">Let's Build <span class="accent-text">Something</span></h2>
+            <p class="section-subtitle">Have a project, role, or idea to share? My inbox is open.</p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
-                <!-- Full Stack Web Development -->
-                <div
-                    class="certification-card group bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up border border-gray-100 dark:border-gray-700">
-                    <div
-                        class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-code text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 text-center">
-                        Full Stack Web Development
-                    </h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-center text-sm">
-                        OSTAD - PHP, Laravel & Vue.js
-                    </p>
-                    <a href="https://drive.google.com/file/d/1mVDAX3hOLExW3gJMnIWCHC2P63If2KsK/view?usp=drive_link"
-                        target="_blank"
-                        class="inline-flex items-center justify-center w-full px-3 py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-blue-100 dark:hover:bg-blue-900/50 border border-blue-200 dark:border-blue-700 text-sm">
-                        View Certificate
-                        <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                    </a>
-                </div>
+            <div class="contact-grid">
+                <div class="term-card contact-info-card">
+                    <div class="term-card-head"><span class="term-dots"><span></span><span></span><span></span></span></div>
+                    <div class="term-card-body">
+                        <h3 class="contact-card-title">Contact Information</h3>
 
-                <!-- 21 Days of Code -->
-                <div class="certification-card group bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up border border-gray-100 dark:border-gray-700"
-                    style="animation-delay: 0.1s">
-                    <div
-                        class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-laptop-code text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 text-center">
-                        21 Days of Code
-                    </h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-center text-sm">
-                        Web Development Bootcamp
-                    </p>
-                    <a href="https://drive.google.com/file/d/1No1uFYGWP2LmNaECUV32rRK8pXoGfeP3/view?usp=drive_link"
-                        class="inline-flex items-center justify-center w-full px-3 py-2 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-300 font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-purple-100 dark:hover:bg-purple-900/50 border border-purple-200 dark:border-purple-700 text-sm">
-                        View Certificate
-                        <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                    </a>
-                </div>
+                        <div class="contact-row">
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <h4>Address</h4>
+                                <p>Uttara Sector#09, Road#3/F, Wasa Staff Quarter, Uttara-Dhaka:1230</p>
+                                <a href="https://maps.app.goo.gl/rks6AxxDWWANXneM9" target="_blank" class="mini-map">
+                                    <i class="fas fa-map"></i> View on Google Maps
+                                </a>
+                            </div>
+                        </div>
 
-                <!-- LinkedIn for Students -->
-                <div class="certification-card group bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up border border-gray-100 dark:border-gray-700"
-                    style="animation-delay: 0.2s">
-                    <div
-                        class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                        <i class="fab fa-linkedin text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 text-center">
-                        LinkedIn for Students
-                    </h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-center text-sm">
-                        Professional Networking
-                    </p>
-                    <a href="https://drive.google.com/file/d/19KaupjkG9kLFEP2gg3o2YrCmBZYwOjwi/view?usp=drive_link"
-                        class="inline-flex items-center justify-center w-full px-3 py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-blue-100 dark:hover:bg-blue-900/50 border border-blue-200 dark:border-blue-700 text-sm">
-                        View Certificate
-                        <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                    </a>
-                </div>
-
-                <!-- Art of Job Searching -->
-                <div class="certification-card group bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up border border-gray-100 dark:border-gray-700"
-                    style="animation-delay: 0.3s">
-                    <div
-                        class="w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-search text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 text-center">
-                        Art of Job Searching
-                    </h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-center text-sm">
-                        Career Development
-                    </p>
-                    <a href="https://drive.google.com/file/d/1G7AW8UBKzipInlzbiK0QEggIJIlIGRm-/view?usp=sharing"
-                        class="inline-flex items-center justify-center w-full px-3 py-2 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-300 font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-green-100 dark:hover:bg-green-900/50 border border-green-200 dark:border-green-700 text-sm">
-                        View Certificate
-                        <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                    </a>
-                </div>
-
-                <!-- Kickstart Your Laravel Journey -->
-                <div class="certification-card group bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up border border-gray-100 dark:border-gray-700"
-                    style="animation-delay: 0.4s">
-                    <div
-                        class="w-16 h-16 rounded-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                        <i class="fab fa-laravel text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 text-center">
-                        Laravel Journey
-                    </h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-center text-sm">
-                        PHP Framework Mastery
-                    </p>
-                    <a href="https://drive.google.com/file/d/1UBrcsrt12u1-4m3VvhpWxabW-eydinTP/view?usp=sharing"
-                        class="inline-flex items-center justify-center w-full px-3 py-2 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-300 font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-red-100 dark:hover:bg-red-900/50 border border-red-200 dark:border-red-700 text-sm">
-                        View Certificate
-                        <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                    </a>
-                </div>
-
-                <!-- UI UX Design Fundamentals -->
-                <div class="certification-card group bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up border border-gray-100 dark:border-gray-700"
-                    style="animation-delay: 0.5s">
-                    <div
-                        class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-paint-brush text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 text-center">
-                        UI/UX Design
-                    </h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-center text-sm">
-                        Design Fundamentals
-                    </p>
-                    <a href="https://drive.google.com/file/d/1Uf2mvak6a4wYwJcrwYJ5gXOsEphdNhIe/view?usp=sharing"
-                        class="inline-flex items-center justify-center w-full px-3 py-2 bg-pink-50 dark:bg-pink-900/30 text-pink-600 dark:text-pink-300 font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-pink-100 dark:hover:bg-pink-900/50 border border-pink-200 dark:border-pink-700 text-sm">
-                        View Certificate
-                        <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                    </a>
-                </div>
-
-                <!-- Basic Electronics -->
-                <div class="certification-card group bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up border border-gray-100 dark:border-gray-700"
-                    style="animation-delay: 0.6s">
-                    <div
-                        class="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-bolt text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 text-center">
-                        Basic Electronics
-                    </h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-center text-sm">
-                        Beginners Course
-                    </p>
-                    <a href="https://drive.google.com/file/d/1QavCtci4wbHDpusA93Y_xRP0eEtkT8Qq/view?usp=drive_link"
-                        class="inline-flex items-center justify-center w-full px-3 py-2 bg-yellow-50 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-300 font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-yellow-100 dark:hover:bg-yellow-900/50 border border-yellow-200 dark:border-yellow-700 text-sm">
-                        View Certificate
-                        <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                    </a>
-                </div>
-
-                <!-- MERN Stack -->
-                <div class="certification-card group bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up border border-gray-100 dark:border-gray-700"
-                    style="animation-delay: 0.7s">
-                    <div
-                        class="w-16 h-16 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                        <i class="fab fa-node-js text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 text-center">
-                        MERN Stack
-                    </h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-center text-sm">
-                        Skills, Scope & Benefits
-                    </p>
-                    <a href="https://drive.google.com/file/d/1rXDEJTr9Ojrewj4tcG2u4aQXrdZjLJ-_/view?usp=drive_link"
-                        class="inline-flex items-center justify-center w-full px-3 py-2 bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-300 font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-teal-100 dark:hover:bg-teal-900/50 border border-teal-200 dark:border-teal-700 text-sm">
-                        View Certificate
-                        <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                    </a>
-                </div>
-
-                <!-- Cybersecurity -->
-                <div class="certification-card group bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up border border-gray-100 dark:border-gray-700"
-                    style="animation-delay: 0.8s">
-                    <div
-                        class="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-shield-alt text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 text-center">
-                        Cybersecurity
-                    </h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-center text-sm">
-                        Learning from Incidents
-                    </p>
-                    <a href="https://drive.google.com/file/d/1l7doY8zeczPczDgEoxEHxX11nYRrr74o/view?usp=drive_link"
-                        class="inline-flex items-center justify-center w-full px-3 py-2 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 border border-indigo-200 dark:border-indigo-700 text-sm">
-                        View Certificate
-                        <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                    </a>
-                </div>
-
-                <!-- SQL Course -->
-                <div class="certification-card group bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up border border-gray-100 dark:border-gray-700"
-                    style="animation-delay: 0.9s">
-                    <div
-                        class="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-database text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 text-center">
-                        SQL Course
-                    </h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-center text-sm">
-                        Database Management
-                    </p>
-                    <a href="https://drive.google.com/file/d/1PAjW3p-0oTmNkp-KVe_Vhd2MGqFsPn5X/view?usp=drive_link"
-                        class="inline-flex items-center justify-center w-full px-3 py-2 bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-300 font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-orange-100 dark:hover:bg-orange-900/50 border border-orange-200 dark:border-orange-700 text-sm">
-                        View Certificate
-                        <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                    </a>
-                </div>
-
-                <!-- Google Cloud Operations -->
-                <div class="certification-card group bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up border border-gray-100 dark:border-gray-700"
-                    style="animation-delay: 1.0s">
-                    <div
-                        class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                        <i class="fab fa-google text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 text-center">
-                        Google Cloud Operations
-                    </h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-center text-sm">
-                        Scaling with GCP
-                    </p>
-                    <a href="https://drive.google.com/file/d/1dpvDJmce76C5C4LugmqP8VWP9lIuPXaz/view?usp=drive_link"
-                        class="inline-flex items-center justify-center w-full px-3 py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-blue-100 dark:hover:bg-blue-900/50 border border-blue-200 dark:border-blue-700 text-sm">
-                        View Certificate
-                        <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                    </a>
-                </div>
-
-                <!-- Cloud Computing -->
-                <div class="certification-card group bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up border border-gray-100 dark:border-gray-700"
-                    style="animation-delay: 1.1s">
-                    <div
-                        class="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-cloud text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2 text-center">
-                        Cloud Computing
-                    </h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-center text-sm">
-                        Fundamental Concepts
-                    </p>
-                    <a href="https://drive.google.com/file/d/1uA8oeUePS5AX0pVf_-4UC2OtRr-Cfwxc/view?usp=drive_link"
-                        class="inline-flex items-center justify-center w-full px-3 py-2 bg-cyan-50 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-300 font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-cyan-100 dark:hover:bg-cyan-900/50 border border-cyan-200 dark:border-cyan-700 text-sm">
-                        View Certificate
-                        <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                    </a>
-                </div>
-
-            </div>
-
-            <!-- View All Certifications Button -->
-            <div class="text-center mt-12 animate-fade-in-up" style="animation-delay: 1.3s">
-                <a href="https://drive.google.com/drive/folders/1vXb9Ceh73GHBMhZvj-Z4CL1MVljUP3i2" target="_blank"
-                    class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-lg">
-                    <i class="fas fa-certificate mr-3 text-xl"></i>
-                    View All Certifications
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 lg:py-24 bg-white dark:bg-gray-900">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2
-                class="section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-800 dark:text-white mb-12 lg:mb-16">
-                Get In Touch
-            </h2>
-
-            <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
-                <!-- Contact Information -->
-                <div class="lg:w-2/5">
-                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 sm:p-8">
-                        <h3
-                            class="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white mb-6 text-center lg:text-left">
-                            Contact Information
-                        </h3>
-
-                        <div class="space-y-6">
-                            <!-- Address -->
-                            <div class="flex items-start space-x-4">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0 mt-1">
-                                    <i class="fas fa-map-marker-alt text-blue-500 text-sm"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-semibold text-gray-800 dark:text-white text-base mb-1">
-                                        Address
-                                    </h4>
-                                    <p class="text-gray-600 dark:text-gray-300 text-sm">
-                                        Uttara Sector#09, Road#3/F, Wasa Staff Quarter,
-                                        Uttara-Dhaka:1230
-                                    </p>
-                                    <!-- Mini Map -->
-                                    <div
-                                        class="mt-3 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-600 shadow-sm">
-                                        <a href="https://maps.app.goo.gl/rks6AxxDWWANXneM9" target="_blank"
-                                            class="block relative group cursor-pointer">
-                                            <div
-                                                class="bg-gradient-to-br from-blue-400 to-blue-600 h-24 flex items-center justify-center">
-                                                <div class="text-center text-white">
-                                                    <i class="fas fa-map text-lg mb-1"></i>
-                                                    <p class="text-xs font-medium">View on Google Maps</p>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
-                                                <i
-                                                    class="fas fa-external-link-alt text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
-                                            </div>
-                                        </a>
-                                    </div>
+                        <div class="contact-row">
+                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                            <div>
+                                <h4>Phone</h4>
+                                <a href="tel:+8801612605228" class="contact-value">+8801612605228</a>
+                                <div class="chip-row">
+                                    <a href="tel:+8801612605228" class="chip"><i class="fas fa-phone"></i> Call</a>
+                                    <a href="https://wa.me/+8801612605228" target="_blank" class="chip"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Phone -->
-                            <div class="flex items-start space-x-4">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center flex-shrink-0 mt-1">
-                                    <i class="fas fa-phone text-green-500 text-sm"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-semibold text-gray-800 dark:text-white text-base mb-1">
-                                        Phone
-                                    </h4>
-                                    <a href="tel:+8801612605228"
-                                        class="text-gray-600 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 transition-colors duration-300 flex items-center group text-sm">
-                                        +8801612605228
-                                        <i
-                                            class="fas fa-phone-alt ml-2 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs"></i>
-                                    </a>
-                                    <div class="flex space-x-2 mt-2">
-                                        <a href="tel:+8801612605228"
-                                            class="inline-flex items-center px-2 py-1 bg-green-500 text-white text-xs rounded-full hover:bg-green-600 transition-colors duration-300">
-                                            <i class="fas fa-phone mr-1 text-xs"></i>
-                                            Call Now
-                                        </a>
-                                        <a href="https://wa.me/+8801612605228" target="_blank"
-                                            class="inline-flex items-center px-2 py-1 bg-green-600 text-white text-xs rounded-full hover:bg-green-700 transition-colors duration-300">
-                                            <i class="fab fa-whatsapp mr-1 text-xs"></i>
-                                            WhatsApp
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Email -->
-                            <div class="flex items-start space-x-4">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center flex-shrink-0 mt-1">
-                                    <i class="fas fa-envelope text-red-500 text-sm"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-semibold text-gray-800 dark:text-white text-base mb-1">
-                                        Email
-                                    </h4>
-                                    <a href="mailto:nusrulnakibnahid.mail@gmail.com"
-                                        class="text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300 flex items-center group text-sm">
-                                        nusrulnakibnahid.mail@gmail.com
-                                        <i
-                                            class="fas fa-envelope ml-2 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs"></i>
-                                    </a>
-                                    <div class="mt-2">
-                                        <a href="mailto:nusrulnakibnahid.mail@gmail.com"
-                                            class="inline-flex items-center px-2 py-1 bg-red-500 text-white text-xs rounded-full hover:bg-red-600 transition-colors duration-300">
-                                            <i class="fas fa-paper-plane mr-1 text-xs"></i>
-                                            Send Email
-                                        </a>
-                                    </div>
+                        <div class="contact-row">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h4>Email</h4>
+                                <a href="mailto:nusrulnakibnahid.mail@gmail.com" class="contact-value break-all">nusrulnakibnahid.mail@gmail.com</a>
+                                <div class="chip-row">
+                                    <a href="mailto:nusrulnakibnahid.mail@gmail.com" class="chip"><i class="fas fa-paper-plane"></i> Send Email</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Contact Form -->
-                <div class="lg:w-3/5">
-                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 sm:p-8">
-                        <h3
-                            class="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white mb-6 text-center lg:text-left">
-                            Send Me a Message
-                        </h3>
+                <div class="term-card contact-form-card">
+                    <div class="term-card-head"><span class="term-dots"><span></span><span></span><span></span></span></div>
+                    <div class="term-card-body">
+                        <h3 class="contact-card-title">Send Me a Message</h3>
 
-                        <form id="contactForm" class="space-y-3.5">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                                <div>
-                                    <label for="name"
-                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your
-                                        Name</label>
-                                    <input type="text" id="name"
-                                        class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-sm"
-                                        required />
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" id="name" required />
                                 </div>
-
-                                <div>
-                                    <label for="email"
-                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your
-                                        Email</label>
-                                    <input type="email" id="email"
-                                        class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-sm"
-                                        required />
+                                <div class="form-field">
+                                    <label for="email">Your Email</label>
+                                    <input type="email" id="email" required />
                                 </div>
                             </div>
-
-                            <div>
-                                <label for="subject"
-                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
-                                <input type="text" id="subject"
-                                    class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-sm"
-                                    required />
+                            <div class="form-field">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" required />
                             </div>
-
-                            <div>
-                                <label for="message"
-                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
-                                <textarea id="message" rows="4"
-                                    class="form-textarea w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-sm"
-                                    required></textarea>
+                            <div class="form-field">
+                                <label for="message">Message</label>
+                                <textarea id="message" rows="4" required></textarea>
                             </div>
-
-                            <button type="submit"
-                                class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-md text-sm">
-                                Send Message
+                            <button type="submit" class="btn btn-primary full-width">
+                                <i class="fas fa-paper-plane"></i> Send Message
                             </button>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <!-- Follow Me Section - Centered at Bottom -->
-            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-                <h4 class="text-xl font-semibold text-gray-800 dark:text-white mb-6 text-center">
-                    Follow Me
-                </h4>
-
-                <div class="flex justify-center space-x-4">
-                    <!-- LinkedIn - Original Blue -->
-                    <a href="https://www.linkedin.com/in/nakib-nahid/" target="_blank"
-                        class="social-link w-12 h-12 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center text-[#0077B5] border border-gray-200 dark:border-gray-700 hover:bg-[#0077B5] hover:text-white transition-all duration-300 transform hover:scale-110 shadow-sm"
-                        title="LinkedIn Profile">
-                        <i class="fab fa-linkedin-in text-lg"></i>
-                    </a>
-
-                    <!-- GitHub - Original Black -->
-                    <a href="https://github.com/nusrulnakibnahid" target="_blank"
-                        class="social-link w-12 h-12 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center text-gray-800 dark:text-white border border-gray-200 dark:border-gray-700 hover:bg-gray-800 hover:text-white dark:hover:bg-white dark:hover:text-gray-800 transition-all duration-300 transform hover:scale-110 shadow-sm"
-                        title="GitHub Profile">
-                        <i class="fab fa-github text-lg"></i>
-                    </a>
-
-                    <!-- Facebook - Original Blue -->
-                    <a href="https://www.facebook.com/nahid.restricted.fb" target="_blank"
-                        class="social-link w-12 h-12 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center text-[#1877F2] border border-gray-200 dark:border-gray-700 hover:bg-[#1877F2] hover:text-white transition-all duration-300 transform hover:scale-110 shadow-sm"
-                        title="Facebook Profile">
-                        <i class="fab fa-facebook-f text-lg"></i>
-                    </a>
-
-                    <!-- Instagram - Original Gradient -->
-                    <a href="https://www.instagram.com/nahid.restricted/" target="_blank"
-                        class="social-link w-12 h-12 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 transform hover:scale-110 shadow-sm relative overflow-hidden group"
-                        title="Instagram Profile">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCAF45] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        </div>
-                        <i
-                            class="fab fa-instagram text-lg text-gray-800 dark:text-white group-hover:text-white relative z-10"></i>
-                    </a>
-
-                    <!-- WhatsApp - Original Green -->
-                    <a href="https://wa.me/+8801612605228" target="_blank"
-                        class="social-link w-12 h-12 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center text-[#25D366] border border-gray-200 dark:border-gray-700 hover:bg-[#25D366] hover:text-white transition-all duration-300 transform hover:scale-110 shadow-sm"
-                        title="WhatsApp Chat">
-                        <i class="fab fa-whatsapp text-lg"></i>
-                    </a>
-
-                    <!-- Discord - Same Purple -->
-                    <a href="https://discord.com/users/nahid_restricted" target="_blank"
-                        class="social-link w-12 h-12 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center text-purple-600 border border-gray-200 dark:border-gray-700 hover:bg-purple-600 hover:text-white transition-all duration-300 transform hover:scale-110 shadow-sm"
-                        title="Discord Profile">
-                        <i class="fab fa-discord text-lg"></i>
-                    </a>
+            <div class="socials-block">
+                <h4>Follow Me</h4>
+                <div class="socials-row">
+                    <a href="https://www.linkedin.com/in/nakib-nahid/" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/nusrulnakibnahid" target="_blank" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.facebook.com/nahid.restricted.fb" target="_blank" class="social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/nahid.restricted/" target="_blank" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/+8801612605228" target="_blank" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://discord.com/users/nahid_restricted" target="_blank" class="social-link" title="Discord"><i class="fab fa-discord"></i></a>
                 </div>
 
-                <!-- WhatsApp Quick Action Button - Centered at Bottom -->
-                <div class="mt-8 flex justify-center">
-                    <a href="https://wa.me/+8801612605228" target="_blank"
-                        class="inline-flex items-center justify-center px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 shadow-lg text-base">
-                        <i class="fab fa-whatsapp mr-3 text-lg"></i>
-                        Chat on WhatsApp
+                <div class="center-cta">
+                    <a href="https://wa.me/+8801612605228" target="_blank" class="btn btn-primary">
+                        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
                     </a>
                 </div>
             </div>
+        </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-6">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-300 text-sm">
-                &copy; 2026 Nusrul Nakib Nahid. All rights reserved.
-            </p>
+    <!-- ================= Footer ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Nusrul Nakib Nahid. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Back to top -->
     <a href="#home" id="backToTop" class="back-to-top" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </a>
